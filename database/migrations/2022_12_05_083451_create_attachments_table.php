@@ -13,16 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('attachments', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('phone')->unique()->nullable();
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->timestamp('email_verified_at');
-            $table->tinyInteger('type');
+            $table->string('filepath');
+            $table->string('attachable_type');
+            $table->string('file_name');
+            $table->bigInteger('attachable_id')->unsigned();
+            $table->string('extension');
+            $table->string('mime_type');
+            $table->integer('size');
             $table->timestamps();
-            $table->rememberToken();
         });
     }
 
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('attachments');
     }
 };
