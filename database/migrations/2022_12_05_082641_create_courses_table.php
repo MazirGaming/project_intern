@@ -17,13 +17,13 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug')->unique();
-            $table->string('link')->unique();
+            $table->string('link')->nullable();
             $table->decimal('price', 17, 2);
             $table->decimal('old_price', 17, 2);
             $table->bigInteger('created_by');
             $table->bigInteger('category_id')->unsigned();
-            $table->integer('lesson');
-            $table->integer('view_count');
+            $table->integer('lesson')->default(0);
+            $table->integer('view_count')->default(0);
             $table->json('benefits')->nullable();
             $table->json('fqa')->nullable();
             $table->tinyInteger('is_feture');

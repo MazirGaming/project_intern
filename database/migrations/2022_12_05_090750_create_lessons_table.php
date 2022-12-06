@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('lessons', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
+            $table->string('name');
             $table->bigInteger('course_id')->unsigned();
             $table->bigInteger('section_id')->unsigned();
             $table->tinyInteger('video_type');
