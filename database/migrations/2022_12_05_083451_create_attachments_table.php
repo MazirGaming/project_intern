@@ -21,7 +21,7 @@ return new class extends Migration
             $table->bigInteger('attachable_id')->unsigned();
             $table->string('extension');
             $table->string('mime_type');
-            $table->Integer('size');
+            $table->integer('size');
             $table->timestamps();
         });
     }
