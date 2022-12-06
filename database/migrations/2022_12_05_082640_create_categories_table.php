@@ -15,14 +15,14 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
+            $table->string('name');
             $table->string('slug')->unique();
-            $table->Integer('parent');
-            $table->Integer('created_by');
+            $table->bitInteger('parent')->nullable();
+            $table->bigInteger('created_by');
             $table->text('content');
-            $table->string('meta_title');
-            $table->string('meta_desc');
-            $table->string('meta_keyword');
+            $table->string('meta_title')->nullable();
+            $table->string('meta_desc')->nullable();
+            $table->string('meta_keyword')->nullable();
             $table->timestamps();
         });
     }
