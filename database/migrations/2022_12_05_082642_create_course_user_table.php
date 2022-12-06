@@ -19,8 +19,6 @@ return new class extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->boolean('paid')->default(false);
             $table->timestamps();
-            $table->foreign('course_id')->references('id')->on('courses');
-            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

@@ -30,9 +30,9 @@ return new class extends Migration
             $table->tinyInteger('is_online');
             $table->text('description');
             $table->longText('content');
-            $table->string('meta_title');
-            $table->string('meta_desc');
-            $table->string('meta_keyword');
+            $table->string('meta_title')->nullable();
+            $table->string('meta_desc')->nullable();
+            $table->string('meta_keyword')->nullable();
             $table->timestamps();
             $table->foreign('category_id')->references('id')->on('categories');
         });
