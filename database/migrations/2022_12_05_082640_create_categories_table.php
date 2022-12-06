@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug')->unique();
-            $table->bitInteger('parent')->nullable();
+            $table->bigInteger('parent')->nullable();
             $table->bigInteger('created_by');
             $table->text('content');
             $table->string('meta_title')->nullable();
