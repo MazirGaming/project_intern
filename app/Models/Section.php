@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Section extends Model
 {
     use HasFactory;
+
     public function lession()
     {
         return $this->belongsTo(Lession::class);
