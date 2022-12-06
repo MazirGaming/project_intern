@@ -19,13 +19,11 @@ return new class extends Migration
             $table->bigInteger('course_id')->unsigned();
             $table->bigInteger('section_id')->unsigned();
             $table->tinyInteger('video_type');
-            $table->tinyInteger('video_url');
+            $table->string('video_url');
             $table->string('time');
             $table->boolean('preview');
             $table->text('content');
             $table->timestamps();
-            $table->foreign('course_id')->references('id')->on('courses');
-            $table->foreign('section_id')->references('id')->on('sections');
         });
     }
 
