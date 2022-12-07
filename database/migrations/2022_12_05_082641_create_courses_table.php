@@ -22,7 +22,7 @@ return new class extends Migration
             $table->decimal('old_price', 17, 2);
             $table->bigInteger('created_by');
             $table->bigInteger('category_id')->unsigned();
-            $table->integer('lesson')->default(0);
+            $table->integer('lessons')->default(0);
             $table->integer('view_count')->default(0);
             $table->json('benefits')->nullable();
             $table->json('fqa')->nullable();
