@@ -22,7 +22,7 @@ class CategoryFactory extends Factory
             'name' => fake()->unique()->name(),
             'slug' => fake()->name(),
             'parent' => '2',
-            'created_by' => '3', 
+            'created_by' => '3',
             'content' => Str::random(10),
             'meta_title' => Str::random(10),
             'meta_desc' => Str::random(10),
