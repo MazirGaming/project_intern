@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -22,11 +21,11 @@ return new class extends Migration
             $table->decimal('old_price', 17, 2);
             $table->bigInteger('created_by');
             $table->bigInteger('category_id')->unsigned();
-            $table->integer('lesson')->default(0);
+            $table->integer('lessons')->default(0);
             $table->integer('view_count')->default(0);
             $table->json('benefits')->nullable();
             $table->json('fqa')->nullable();
-            $table->tinyInteger('is_feture');
+            $table->tinyInteger('is_feature');
             $table->tinyInteger('is_online');
             $table->text('description');
             $table->longText('content');
