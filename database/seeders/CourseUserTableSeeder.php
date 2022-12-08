@@ -13,6 +13,6 @@ class CourseUserTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        \App\Models\CourseUser::factory(10)->create();
     }
 }

@@ -13,6 +13,6 @@ class SectionsTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        \App\Models\Section::factory(10)->create();
     }
 }

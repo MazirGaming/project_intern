@@ -13,6 +13,6 @@ class LessonsTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        \App\Models\Lesson::factory(10)->create();
     }
 }
