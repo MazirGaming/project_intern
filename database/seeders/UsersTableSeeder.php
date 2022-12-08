@@ -18,7 +18,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'root',
             'email' => 'admin@gmail.com',
             'email_verified_at' => now(),
-            'password' => 'bcrypt(admin123456)', // password
+            'password' => bcrypt('admin123456'), // password
             'remember_token' => Str::random(10),
             'type' => '1'
         ]);
