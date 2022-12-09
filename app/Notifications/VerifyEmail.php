@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Lang;
 use Illuminate\Auth\Notifications\VerifyEmail as VerifyEmailBase;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Symfony\Component\Mime\Email;
 
 class VerifyEmail extends VerifyEmailBase
 {
@@ -18,10 +19,12 @@ class VerifyEmail extends VerifyEmailBase
     // change as you want
     public function toMail($notifiable)
     {
-        
+        $url = $this->verificationUrl($notifiable);
         return (new MailMessage)
+        
         ->greeting('alo')
         ->action('Xác thực Email', $this->verificationUrl($notifiable))
-        ->line('Thank you for using our application!');
+        ->line('Thank you for using our application!')
+        ->view('auth.verify',['url'=> $this->verificationUrl($notifiable)]);
     }
 }
