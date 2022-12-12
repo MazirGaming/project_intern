@@ -14,10 +14,7 @@ class EventServiceProvider extends ServiceProvider
      *
      * @var array<class-string, array<int, class-string>>
      */
-    public function sendEmailVerificationNotification()
-    {
-        $this->notify(new \App\Notifications\CustomVerifyEmail);
-    }
+
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,

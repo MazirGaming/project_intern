@@ -35,6 +35,10 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'remember_token',
     ];
+    public const TYPES = [
+        'admin' => 1,
+        'student' => 3,
+];
 
     /**
      * The attributes that should be cast.
@@ -49,8 +53,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsToMany(Course::class, 'CourseUser', 'user_id', 'course_id');
     }
+
     public function sendEmailVerificationNotification()
     {
-        $this->notify(new VerifyEmail); // my notification
+        $this->notify((new VerifyEmail)->onQueue('default'));
     }
 }

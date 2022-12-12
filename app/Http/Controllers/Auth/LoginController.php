@@ -40,18 +40,32 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-    public function login(Request $request)
+    protected function redirectTo()
     {
-        $credentials = [
-            'email' => $request->email,
-            'password' => $request->password,
-        ];
-        if (Auth::attempt($credentials)) {
-            if (Auth::user()->type == 1) {
-                return redirect('/admin');
-            } else {
-                return redirect('/home');
-            }
+        // $credentials = [
+    //     'email' => $request->email,
+    //     'password' => $request->password,
+        // ];
+        // if (Auth::attempt($credentials)) {
+        if (Auth::user()->type == 1) {
+            return '/admin';
+        } else {
+            return '/home';
         }
+        // }
     }
+    // public function login(Request $request)
+    // {
+    //     $credentials = [
+    //         'email' => $request->email,
+    //         'password' => $request->password,
+    //     ];
+    //     if (Auth::attempt($credentials)) {
+    //         if (Auth::user()->type == 1) {
+    //             return redirect('/admin');
+    //         } else {
+    //             return redirect('/home');
+    //         }
+    //     }
+    // }
 }
