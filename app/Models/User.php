@@ -50,7 +50,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsToMany(Course::class, 'CourseUser', 'user_id', 'course_id');
     }
     public function sendEmailVerificationNotification()
-{
-    $this->notify(new VerifyEmail); // my notification
-}
+    {
+        $this->notify(new VerifyEmail); // my notification
+    }
 }
