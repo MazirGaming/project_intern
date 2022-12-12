@@ -13,10 +13,12 @@ class VerifyEmail extends VerifyEmailBase
     // change as you want
     public function toMail($notifiable)
     {
+        $name = $notifiable->name;
+
         $url = $this->verificationUrl($notifiable);
         return (new MailMessage)
         ->salutation('')
         ->with('')
-        ->markdown('mail.invoice.paid', ['url'=> $url]);
+        ->markdown('mail.invoice.paid', ['url'=> $url, 'name'=>$name]);
     }
 }
