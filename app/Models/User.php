@@ -38,7 +38,17 @@ class User extends Authenticatable implements MustVerifyEmail
     public const TYPES = [
         'admin' => 1,
         'student' => 3,
-];
+    ];
+
+    public function isAdmin()
+    {
+        return $this->type = static::TYPES['admin'];
+    }
+
+    public function isStudent()
+    {
+        return $this->type = static::TYPES['student'];
+    }
 
     /**
      * The attributes that should be cast.

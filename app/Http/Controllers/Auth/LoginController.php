@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth;
 
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -42,30 +41,10 @@ class LoginController extends Controller
     }
     protected function redirectTo()
     {
-        // $credentials = [
-    //     'email' => $request->email,
-    //     'password' => $request->password,
-        // ];
-        // if (Auth::attempt($credentials)) {
-        if (Auth::user()->type == 1) {
-            return '/admin';
+        if (Auth::user()->isAdmin()) {
+            return url('/admin');
         } else {
-            return '/home';
+            return url('/home');
         }
-        // }
     }
-    // public function login(Request $request)
-    // {
-    //     $credentials = [
-    //         'email' => $request->email,
-    //         'password' => $request->password,
-    //     ];
-    //     if (Auth::attempt($credentials)) {
-    //         if (Auth::user()->type == 1) {
-    //             return redirect('/admin');
-    //         } else {
-    //             return redirect('/home');
-    //         }
-    //     }
-    // }
 }
