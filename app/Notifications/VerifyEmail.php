@@ -15,6 +15,6 @@ class VerifyEmail extends VerifyEmailBase implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-        ->markdown('mail.verifyUser', ['url'=> $this->verificationUrl($notifiable), 'name'=> $notifiable->name]);
+        ->markdown('mail.verify_user', ['url'=> $this->verificationUrl($notifiable), 'name'=> $notifiable->name]);
     }
 }
