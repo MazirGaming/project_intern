@@ -43,8 +43,7 @@ class LoginController extends Controller
     {
         if (Auth::user()->isAdmin()) {
             return url('/admin');
-        } else {
-            return url('/home');
         }
+        return url('/home');
     }
 }
