@@ -23,4 +23,5 @@ Route::get('/admin', function () {
     return "Hello Admin";
 });
 
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

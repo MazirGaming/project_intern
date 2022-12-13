@@ -94,9 +94,9 @@ return [
             'throttle' => 60,
         ],
     ],
-    'verification' => [
-        'expire' => 1, // One year in minutes - enter as many minutes as you would like here
-    ],
+    // 'verification' => [
+    //     'expire' => 1, // One year in minutes - enter as many minutes as you would like here
+    // ],
 
     /*
     |--------------------------------------------------------------------------
