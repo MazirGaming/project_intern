@@ -42,12 +42,12 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function isAdmin()
     {
-        return $this->type = static::TYPES['admin'];
+        return $this->type == static::TYPES['admin'];
     }
 
     public function isStudent()
     {
-        return $this->type = static::TYPES['student'];
+        return $this->type == static::TYPES['student'];
     }
 
     /**
