@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Auth\VerificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,15 +19,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('email/verify/{id}/{hash}', [VerificationController::class,'verify'])->name('verifycation.verify');
+
 Auth::routes(['verify' => true]);
 
 
 Route::prefix('admin')->group(function () {
+    Route::resource('user', App\Http\Controllers\Backend\UserController::class);
     Route::get('/', [App\Http\Controllers\Backend\DashboardController::class, 'index']);
 });
-
-
-
-
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
