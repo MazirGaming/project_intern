@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::get('email/verify/{id}/{hash}', [VerificationController::class,'verify'])->name('verifycation.verify');
 Auth::routes(['verify' => true]);
 
 
