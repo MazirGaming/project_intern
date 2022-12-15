@@ -37,7 +37,8 @@
             <a href="javascript:void(0);" id="toggle_btn">
                 <i class="fe fe-text-align-left"></i>
             </a>
-            @yield('search')
+
+            @include('admin.partitions.search')
 
             <a class="mobile_btn" id="mobile_btn">
                 <i class="fa fa-bars"></i>
