@@ -31,7 +31,7 @@
                                                     <a href="{{route('user.edit', $user->id)}}" class="btn btn-sm bg-success-light me-2">
                                                         <i class="fe fe-pencil"></i>
                                                     </a>
-                                                    <a href="delete.php?id={{$user->id}}" class="btn btn-sm bg-danger-light">
+                                                    <a href="{{route('user.destroy', $user->id)}}" class="btn btn-sm bg-danger-light">
                                                         <i class="fe fe-trash"></i>
                                                     </a>
                                                 </div>

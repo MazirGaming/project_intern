@@ -24,6 +24,11 @@ class UserController extends Controller
 
     public function edit($id)
     {
-       
+       //
+    }
+
+    public function destroy($id)
+    {
+       //
     }
 }
