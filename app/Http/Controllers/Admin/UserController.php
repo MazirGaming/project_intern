@@ -17,7 +17,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         return view('list_user', [
-               'users' => $this->userRepository->getAll(['request' => $request])
+               'users' => $this->userRepository->getAll(request()->all())
         ]);
     }
 }

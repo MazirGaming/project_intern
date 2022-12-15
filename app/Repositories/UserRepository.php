@@ -15,9 +15,8 @@ class UserRepository
 
     public function getAll(array $input = [])
     {
-        $request = $input['request'];
         $query = $this->model->query();
-        if ($search = $request['search']) {
+        if ($search = $input['search']) {
             $query = $query->where('name', 'like', '%' . $search . '%')
                            ->orWhere('phone', 'like', '%' . $search . '%')
                            ->orWhere('email', 'like', '%' . $search . '%');
