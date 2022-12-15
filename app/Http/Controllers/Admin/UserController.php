@@ -9,6 +9,7 @@ use App\Repositories\UserRepository;
 class UserController extends Controller
 {
     protected $userRepository;
+
     public function __construct(UserRepository $userRepository)
     {
         $this->userRepository = $userRepository;
@@ -16,8 +17,13 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
-        return view('list_user', [
+        return view('admin.user.index', [
                'users' => $this->userRepository->getAll(request()->all())
         ]);
+    }
+
+    public function edit($id)
+    {
+       
     }
 }
