@@ -15,7 +15,6 @@ class UserRepository
 
     public function getAll(array $input = [])
     {
-        
         $query = $this->model->query();
 
         if ($search = $input) {
