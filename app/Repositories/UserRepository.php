@@ -15,12 +15,16 @@ class UserRepository
 
     public function getAll(array $input = [])
     {
+        $request = $input['request'];
         $query = $this->model->query();
-        if ($search = request()->search) {
-            return $query = $query->where('name', 'like', '%' . $search . '%')
+        if ($search = $request['search']) {
+            $query = $query->where('name', 'like', '%' . $search . '%')
                            ->orWhere('phone', 'like', '%' . $search . '%')
-                           ->orWhere('email', 'like', '%' . $search . '%')->paginate(10);
+                           ->orWhere('email', 'like', '%' . $search . '%');
         }
+
+        // Xử lý điều kiện search/filter/sort ở đây
+
         return $query->orderBy('id', 'desc')->paginate(10);
     }
 }
