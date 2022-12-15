@@ -22,7 +22,7 @@ Auth::routes(['verify' => true]);
 
 
 Route::prefix('admin')->group(function () {
-    Route::get('/', [App\Http\Controllers\Backend\DashboardController::class, 'index']);
+    Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'index']);
 });
 
 
