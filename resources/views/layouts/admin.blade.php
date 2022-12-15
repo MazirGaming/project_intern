@@ -37,12 +37,7 @@
             <a href="javascript:void(0);" id="toggle_btn">
                 <i class="fe fe-text-align-left"></i>
             </a>
-            <div class="top-nav-search">
-                <form>
-                    <input type="text" class="form-control" placeholder="Search here" name="search">
-                    <button class="btn" type="submit"><i class="fa fa-search"></i></button>
-                </form>
-            </div>
+            @yield('search')
 
             <a class="mobile_btn" id="mobile_btn">
                 <i class="fa fa-bars"></i>
