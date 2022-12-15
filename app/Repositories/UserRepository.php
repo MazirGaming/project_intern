@@ -17,7 +17,7 @@ class UserRepository
     {
         $query = $this->model->query();
 
-        if ($search = $input) {
+        if (!empty($input)) {
             $query->where('name', 'like', '%' . $input['search'] . '%')
                            ->orWhere('phone', 'like', '%' . $input['search'] . '%')
                            ->orWhere('email', 'like', '%' . $input['search'] . '%');
