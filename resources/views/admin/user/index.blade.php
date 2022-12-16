@@ -1,6 +1,8 @@
 @extends('layouts.admin')
 @section('main')
-
+@push('search')
+    @include('admin.partitions.search')
+@endpush
 <div class="row">
                     <div class="col-md-12 d-flex">
 

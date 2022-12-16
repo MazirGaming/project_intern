@@ -37,9 +37,7 @@
             <a href="javascript:void(0);" id="toggle_btn">
                 <i class="fe fe-text-align-left"></i>
             </a>
-
-            @include('admin.partitions.search')
-
+            @stack('search')
             <a class="mobile_btn" id="mobile_btn">
                 <i class="fa fa-bars"></i>
             </a>
