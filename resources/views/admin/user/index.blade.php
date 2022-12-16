@@ -14,12 +14,30 @@
                                             <tr>
                                                 <th>
                                                     ID
-                                                <a href="?column_name=id&sort_type=asc">ID tăng</a>
-                                                <a href="?column_name=id&sort_type=desc">ID giảm</a>
+                                                @if(request()->get('sort_type') == 'desc')
+                                                    <a href="?column_name=id&sort_type=asc">
+                                                    <i class="fa-solid fa-caret-up"></i>
+                                                </a>
+ 
+                                                @else
+                                                
+                                                <a href="?column_name=id&sort_type=desc">
+                                                    <i class="fa-solid fa-caret-down"></i>
+                                                </a>
+                                                @endif
                                                 </th>
                                                 <th>Name
-                                                <a href="?column_name=name&sort_type=asc">Name tăng</a>
-                                                <a href="?column_name=name&sort_type=desc">Name giảm</a>
+                                                @if(request()->get('sort_type') == 'desc')
+                                                    <a href="?column_name=name&sort_type=asc">
+                                                    <i class="fa-solid fa-caret-up"></i>
+                                                </a>
+ 
+                                                @else
+                                                
+                                                <a href="?column_name=name&sort_type=desc">
+                                                    <i class="fa-solid fa-caret-down"></i>
+                                                </a>
+                                                @endif
                                                 </th>
                                                 <th>Phone</th>
                                                 <th>Email</th>

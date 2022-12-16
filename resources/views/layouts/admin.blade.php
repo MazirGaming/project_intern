@@ -26,10 +26,10 @@
 
             <div class="header-left">
                 <a href="index.html" class="logo">
-                    <img src="assets/img/logo.png" alt="Logo">
+                    <img src="{{asset('assets/img/logo.png')}}" alt="Logo">
                 </a>
                 <a href="index.html" class="logo logo-small">
-                    <img src="assets/img/logo-small.png" alt="Logo" width="30" height="30">
+                    <img src="{{asset('assets/img/logo-small.png')}}" alt="Logo" width="30" height="30">
                 </a>
             </div>
 
@@ -60,7 +60,7 @@
                                         <div class="media d-flex">
                                             <span class="avatar avatar-sm flex-shrink-0">
                                                 <img class="avatar-img rounded-circle" alt="User Image"
-                                                    src="assets/img/profiles/avatar-02.jpg">
+                                                    src="{{asset('assets/img/profiles/avatar-02.jpg')}}">
                                             </span>
                                             <div class="media-body flex-grow-1">
                                                 <p class="noti-details"><span class="noti-title">Carlson Tech</span> has
@@ -76,7 +76,7 @@
                                         <div class="media d-flex">
                                             <span class="avatar avatar-sm flex-shrink-0">
                                                 <img class="avatar-img rounded-circle" alt="User Image"
-                                                    src="assets/img/profiles/avatar-11.jpg">
+                                                    src="{{asset('assets/img/profiles/avatar-11.jpg')}}">
                                             </span>
                                             <div class="media-body flex-grow-1">
                                                 <p class="noti-details"><span class="noti-title">International Software
@@ -93,7 +93,7 @@
                                         <div class="media d-flex">
                                             <span class="avatar avatar-sm flex-shrink-0">
                                                 <img class="avatar-img rounded-circle" alt="User Image"
-                                                    src="assets/img/profiles/avatar-17.jpg">
+                                                    src="{{asset('assets/img/profiles/avatar-17.jpg')}}">
                                             </span>
                                             <div class="media-body flex-grow-1">
                                                 <p class="noti-details"><span class="noti-title">John Hendry</span> sent
@@ -110,7 +110,7 @@
                                         <div class="media d-flex">
                                             <span class="avatar avatar-sm flex-shrink-0">
                                                 <img class="avatar-img rounded-circle" alt="User Image"
-                                                    src="assets/img/profiles/avatar-13.jpg">
+                                                    src="{{asset('assets/img/profiles/avatar-13.jpg')}}">
                                             </span>
                                             <div class="media-body flex-grow-1">
                                                 <p class="noti-details"><span class="noti-title">Mercury Software
@@ -133,13 +133,13 @@
 
                 <li class="nav-item dropdown has-arrow">
                     <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
-                        <span class="user-img"><img class="rounded-circle" src="assets/img/profiles/avatar-01.jpg"
+                        <span class="user-img"><img class="rounded-circle" src="{{asset('assets/img/profiles/avatar-01.jpg')}}"
                                 width="31" alt="Seema Sisty"></span>
                     </a>
                     <div class="dropdown-menu">
                         <div class="user-header">
                             <div class="avatar avatar-sm">
-                                <img src="assets/img/profiles/avatar-01.jpg" alt="User Image"
+                                <img src="{{asset('assets/img/profiles/avatar-01.jpg')}}" alt="User Image"
                                     class="avatar-img rounded-circle">
                             </div>
                             <div class="user-text">
@@ -171,6 +171,7 @@
 
     </div>
 
+    <script src="https://kit.fontawesome.com/46a24d346e.js" crossorigin="anonymous"></script>
 
     <script src="{{asset('assets/js/jquery-3.6.0.min.js')}}"></script>
 
