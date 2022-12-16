@@ -23,6 +23,11 @@ class UserRepository
                            ->orWhere('email', 'like', '%' . $input['search'] . '%');
         }
 
-        return $query->orderBy('id', 'desc')->paginate(10);
+        $columnSortName = $input['column_name'] ?? 'id';
+        $columnSortType = $input['sort_type'] ?? 'DESC';
+
+        return $query->orderBy($columnSortName, $columnSortType)->paginate(10);
+
+        // return $query->orderBy('id', 'desc')->paginate(10);
     }
 }

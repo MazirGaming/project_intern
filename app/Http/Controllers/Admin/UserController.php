@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Repositories\UserRepository;
 
 class UserController extends Controller
@@ -15,7 +14,7 @@ class UserController extends Controller
         $this->userRepository = $userRepository;
     }
 
-    public function index(Request $request)
+    public function index()
     {
         return view('admin.user.index', [
                'users' => $this->userRepository->getAll(request()->all())

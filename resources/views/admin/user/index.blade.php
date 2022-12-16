@@ -12,8 +12,15 @@
                                     <table class="table table-hover table-center mb-0">
                                         <thead>
                                             <tr>
-                                                <th>Avatar</th>
-                                                <th>Name</th>
+                                                <th>
+                                                    ID
+                                                <a href="?column_name=id&sort_type=asc">ID tăng</a>
+                                                <a href="?column_name=id&sort_type=desc">ID giảm</a>
+                                                </th>
+                                                <th>Name
+                                                <a href="?column_name=name&sort_type=asc">Name tăng</a>
+                                                <a href="?column_name=name&sort_type=desc">Name giảm</a>
+                                                </th>
                                                 <th>Phone</th>
                                                 <th>Email</th>
                                                 <th class="text-end">Action</th>
@@ -22,7 +29,7 @@
                                         <tbody>
                                             @foreach($users as $user)   
                                             <tr>
-                                                <td>Avatar</td>
+                                                <td>{{$user->id}}</td>
                                                 <td>{{$user->name}}</td>
                                                 <td>{{$user->phone}}</td>
                                                 <td>{{$user->email}}</td>
