@@ -9,6 +9,6 @@
         </a>
     @else
         <a href="?column_name={{ $name }}&sort_type=desc">
-            <i class="fa-solid fa-caret-up"></i>
+        <i class="fa-solid fa-sort"></i>
         </a>
     @endif
