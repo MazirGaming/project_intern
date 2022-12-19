@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Schema;
 
 class UserRepository
 {
+    public const SORT_TYPES = ['desc', 'asc'];
+
     protected $model;
 
     public function __construct(User $model)
@@ -17,19 +19,19 @@ class UserRepository
     public function getAll(array $input = [])
     {
         $query = $this->model->query();
-
         if (!empty($input['search'])) {
             $query->where('name', 'like', '%' . $input['search'] . '%')
                            ->orWhere('phone', 'like', '%' . $input['search'] . '%')
                            ->orWhere('email', 'like', '%' . $input['search'] . '%');
         }
+
         $columnSortName = $input['column_name'] ?? 'id';
         $columnSortType = $input['sort_type'] ?? 'DESC';
-        if (!Schema::hasColumn('users', $columnSortName) || $columnSortType != 'asc' || $columnSortType != 'desc') {
-            $columnSortName = 'id';
-            $columnSortType = 'DESC';
-            return $query->orderBy($columnSortName, $columnSortType)->paginate(10);
+        $validColumn = Schema::hasColumn($this->model-> getTable(), $columnSortName);
+        $validSortType = in_array(strtolower(trim($columnSortType)), static::SORT_TYPES);
+        if ($validColumn && $validSortType) {
+            $query->orderBy($columnSortName, $columnSortType);
         }
-        return $query->orderBy($columnSortName, $columnSortType)->paginate(10);
+        return $query->paginate();
     }
 }
