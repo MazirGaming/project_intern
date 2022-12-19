@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Schema;
 
 class UserRepository
 {
@@ -22,16 +23,13 @@ class UserRepository
                            ->orWhere('phone', 'like', '%' . $input['search'] . '%')
                            ->orWhere('email', 'like', '%' . $input['search'] . '%');
         }
-
-
-        try {
-            $columnSortName = $input['column_name'] ?? 'id';
-            $columnSortType = $input['sort_type'] ?? 'DESC';
-
+        $columnSortName = $input['column_name'] ?? 'id';
+        $columnSortType = $input['sort_type'] ?? 'DESC';
+        if (!Schema::hasColumn('users', $columnSortName) || $columnSortType != 'asc' || $columnSortType != 'desc') {
+            $columnSortName = 'id';
+            $columnSortType = 'DESC';
             return $query->orderBy($columnSortName, $columnSortType)->paginate(10);
-        } catch(\Illuminate\Database\QueryException $ex) {
-            dd($ex->getMessage());
         }
-        // return $query->orderBy('id', 'desc')->paginate(10);
+        return $query->orderBy($columnSortName, $columnSortType)->paginate(10);
     }
 }
