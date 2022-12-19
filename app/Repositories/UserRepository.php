@@ -35,6 +35,6 @@ class UserRepository
             $query->orderBy($columnSortName, $columnSortType);
         }
 
-        return $query->orderBy($columnSortName, 'desc')->paginate();
+        return $query->orderBy('id', 'desc')->paginate();
     }
 }
