@@ -18,3 +18,4 @@ yarn-error.log
 /.vscode
 /public/assets
 /resources/assets/plugins/.DS_Store
+/resources/assets/.DS_Store
