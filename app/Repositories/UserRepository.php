@@ -19,7 +19,7 @@ class UserRepository
     public function getAll(array $input = [])
     {
         $query = $this->model->query();
-        
+
         if (!empty($input['search'])) {
             $query->where('name', 'like', '%' . $input['search'] . '%')
                            ->orWhere('phone', 'like', '%' . $input['search'] . '%')
@@ -27,14 +27,14 @@ class UserRepository
         }
 
         $columnSortName = $input['column_name'] ?? 'id';
-        $columnSortType = $input['sort_type'] ?? 'DESC';
+        $columnSortType = $input['sort_type'] ?? 'desc';
         $validColumn = Schema::hasColumn($this->model-> getTable(), $columnSortName);
         $validSortType = in_array(strtolower(trim($columnSortType)), static::SORT_TYPES);
 
         if ($validColumn && $validSortType) {
-            $query->orderBy($columnSortName, $columnSortType);
+            return $query->orderBy($columnSortName, $columnSortType)->paginate();
         }
 
-        return $query->paginate();
+        return $query->orderBy('id', 'desc')->paginate();
     }
 }
