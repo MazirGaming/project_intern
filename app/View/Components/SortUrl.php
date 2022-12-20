@@ -36,12 +36,7 @@ class SortUrl extends Component
 
         if ($this->columnName === request()->get('column_name') && in_array(request()->get('sort_type'), static::SORT_TYPES)) {
             $params['sort_type'] = request()->get('sort_type') === 'desc' ? 'asc' : 'desc';
-        }
-
-        if (request()->get('column_name') == $this->columnName) {
-            $iconSort = strtolower(request()->get('sort_type')) == 'desc' ? static::ICON_SORT['asc'] : static::ICON_SORT['desc'];
-        } elseif (request()->get('sort_type') == 'asc' && request()->get('column_name') == $this->columnName) {
-            $iconSort = strtolower(request()->get('sort_type')) == 'asc' ? static::ICON_SORT['desc'] : static::ICON_SORT['desc'];
+            $iconSort = strtolower(request()->get('sort_type')) == 'asc' ? static::ICON_SORT['desc'] : static::ICON_SORT['asc'];
         }
 
         return view('components.sort-url', [
