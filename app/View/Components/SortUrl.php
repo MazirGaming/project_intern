@@ -10,7 +10,11 @@ class SortUrl extends Component
     public $sortType;
     public const SORT_TYPES = ['asc', 'desc'];
     public const SORT_DEFAULT = 'desc';
-    public const iconSort = ['fa-caret-down', 'fa-caret-up', 'fa-sort'];
+    public const ICON_SORT = [
+        'desc' => 'fa-caret-down',
+        'asc' => 'fa-caret-up',
+        'both' => 'fa-sort',
+        ];
 
     public function __construct($columnName)
     {
@@ -28,17 +32,16 @@ class SortUrl extends Component
         $params = request()->all();
         $params['column_name'] = $this->columnName;
         $params['sort_type'] = static::SORT_DEFAULT;
+        $iconSort = static::ICON_SORT['both'];
 
         if ($this->columnName === request()->get('column_name') && in_array(request()->get('sort_type'), static::SORT_TYPES)) {
             $params['sort_type'] = request()->get('sort_type') === 'desc' ? 'asc' : 'desc';
         }
 
-        if (request()->get('sort_type') == 'desc' && request()->get('column_name') == $this->columnName) {
-            $iconSort =  static::iconSort[0];
+        if (request()->get('column_name') == $this->columnName) {
+            $iconSort = strtolower(request()->get('sort_type')) == 'desc' ? static::ICON_SORT['asc'] : static::ICON_SORT['desc'];
         } elseif (request()->get('sort_type') == 'asc' && request()->get('column_name') == $this->columnName) {
-            $iconSort =  static::iconSort[1];
-        } else {
-            $iconSort =  static::iconSort[2];
+            $iconSort = strtolower(request()->get('sort_type')) == 'asc' ? static::ICON_SORT['desc'] : static::ICON_SORT['desc'];
         }
 
         return view('components.sort-url', [
