@@ -14,11 +14,12 @@
                                             <tr>
                                                 <th>
                                                     ID
-                                                <x-sort-column :name="'id'" :type="'desc'"></x-sort-column>
+                                                <x-sort-url :columnName="'id'" :sortType="'desc'">
+                                                </x-sort-url>
                                                 </th>
                                                 <th>
                                                     Name
-                                                <x-sort-column :name="'name'" :type="'desc'"></x-sort-column>
+                                                <x-sort-url :columnName="'name'" :sortType="'desc'"></x-sort-url>
                                                 </th>
                                                 <th>Phone</th>
                                                 <th>Email</th>
