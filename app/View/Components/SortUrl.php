@@ -10,13 +10,11 @@ class SortUrl extends Component
     public $sortType;
     public const SORT_TYPES = ['asc', 'desc'];
     public const SORT_DEFAULT = 'desc';
+    public const iconSort = ['fa-caret-down', 'fa-caret-up', 'fa-sort'];
 
-
-
-    public function __construct($columnName, $sortType)
+    public function __construct($columnName)
     {
         $this->columnName = $columnName;
-        $this->sortType = $sortType;
     }
 
     /**
@@ -35,10 +33,17 @@ class SortUrl extends Component
             $params['sort_type'] = request()->get('sort_type') === 'desc' ? 'asc' : 'desc';
         }
 
-        $sortUrl = route($routeName, $params);
+        if (request()->get('sort_type') == 'desc' && request()->get('column_name') == $this->columnName) {
+            $iconSort =  static::iconSort[0];
+        } elseif (request()->get('sort_type') == 'asc' && request()->get('column_name') == $this->columnName) {
+            $iconSort =  static::iconSort[1];
+        } else {
+            $iconSort =  static::iconSort[2];
+        }
 
         return view('components.sort-url', [
-            'sortUrl' => $sortUrl,
+            'sortUrl' => route($routeName, $params),
+            'iconSort' => $iconSort
         ]);
     }
 }

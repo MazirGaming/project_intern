@@ -14,12 +14,11 @@
                                             <tr>
                                                 <th>
                                                     ID
-                                                <x-sort-url :columnName="'id'" :sortType="'desc'">
-                                                </x-sort-url>
+                                                <x-sort-url :columnName="'id'"></x-sort-url>
                                                 </th>
                                                 <th>
                                                     Name
-                                                <x-sort-url :columnName="'name'" :sortType="'desc'"></x-sort-url>
+                                                <x-sort-url :columnName="'name'"></x-sort-url>
                                                 </th>
                                                 <th>Phone</th>
                                                 <th>Email</th>
@@ -47,7 +46,7 @@
                                             @endforeach
                                         </tbody>
                                     </table>
-                                    {{ $users->appends(['search' => request()->search, 'column_name' => request()->column_name, 'sort_type' => request()->sort_type])->links() }}
+                                    {{ $users->appends(request()->all())->links() }}
                                     
                                 </div>
                                 
