@@ -34,11 +34,10 @@ class SortUrl extends Component
         $params['sort_type'] = static::SORT_DEFAULT;
         $iconSort = static::ICON_SORT['both'];
 
-        if ($this->columnName === request()->get('column_name') && in_array(request()->get('sort_type'), static::SORT_TYPES)) {
+        if ($this->columnName === request()->get('column_name') && in_array(strtolower(request()->get('sort_type')), static::SORT_TYPES)) {
             $params['sort_type'] = request()->get('sort_type') === 'desc' ? 'asc' : 'desc';
-            $iconSort = strtolower(request()->get('sort_type')) == 'asc' ? static::ICON_SORT['desc'] : static::ICON_SORT['asc'];
+            $iconSort = request()->get('sort_type') == 'asc' ? static::ICON_SORT['asc'] : static::ICON_SORT['desc'];
         }
-
         return view('components.sort-url', [
             'sortUrl' => route($routeName, $params),
             'iconSort' => $iconSort
