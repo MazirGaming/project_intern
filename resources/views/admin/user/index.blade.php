@@ -46,7 +46,7 @@
                                             @endforeach
                                         </tbody>
                                     </table>
-                                    {{ $users->appends(['search' => request()->search])->links() }}
+                                    {{ $users->appends(['search' => request()->search, 'column_name' => request()->column_name, 'sort_type' => request()->sort_type])->links() }}
                                     
                                 </div>
                                 

@@ -32,7 +32,7 @@ class UserRepository
         $validSortType = in_array(strtolower(trim($columnSortType)), static::SORT_TYPES);
 
         if ($validColumn && $validSortType) {
-            $query->orderBy($columnSortName, $columnSortType);
+            return $query->orderBy($columnSortName, $columnSortType)->paginate();
         }
 
         return $query->orderBy('id', 'desc')->paginate();
