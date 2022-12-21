@@ -38,7 +38,17 @@ class UserController extends Controller
 
     public function edit($id)
     {
-       //
+        return view('admin.users.edit', [
+            'user' => $this->userRepository->getUser([$id])
+        ]);
+    }
+
+    public function update(StoreUserRequest $request, $id)
+    {
+        $inputs = $request->all();
+        $inputs['type'] = User::TYPES['admin'];
+        $this->userRepository->save($inputs);
+        return redirect()->route('user.index')->with('message', 'The success message!');
     }
 
     public function destroy($id)
