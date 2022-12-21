@@ -27,8 +27,8 @@ class StoreUserRequest extends FormRequest
     {
         return [
             'name' => ['required'],
-            'email' => ['unique:App\Models\User,email', 'regex:/(.+)@(.+)\.(.+)/i'],
-            'phone' => ['unique:App\Models\User,phone', 'numeric'],
+            'email' => ['unique:users,email', 'email'],
+            'phone' => ['unique:users,phone', 'numeric'],
             'password' => ['required', Password::min(6)->symbols()]
         ];
     }
