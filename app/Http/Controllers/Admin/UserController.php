@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Repositories\UserRepository;
 use App\Http\Requests\StoreUserRequest;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -29,7 +30,9 @@ class UserController extends Controller
 
     public function store(StoreUserRequest $request)
     {
-        $this->userRepository->save(request()->all(), 1);
+        $inputs = $request->all();
+        $inputs['type'] = User::TYPES['admin'];
+        $this->userRepository->save($inputs);
         return redirect()->route('user.index')->with('message', 'The success message!');
     }
 

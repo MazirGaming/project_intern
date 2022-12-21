@@ -13,9 +13,8 @@ class BaseRepository
         $this->model = $model;
     }
 
-    public function save(array $inputs, $type, array $conditions = ['id' => null])
+    public function save(array $inputs, array $conditions = ['id' => null])
     {
-        $inputs['type'] = $type;
         return $this->model->updateOrCreate($conditions, $inputs);
     }
 }
