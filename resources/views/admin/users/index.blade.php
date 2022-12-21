@@ -3,7 +3,14 @@
 @push('search')
     @include('admin.partitions.search')
 @endpush
+@if(session()->has('message'))
+    <div class="alert alert-success">
+        {{ session()->get('message') }}
+    </div>
+@endif
+<a href="{{route('user.create')}}">Thêm mới User</a>
 <div class="row">
+    
                     <div class="col-md-12 d-flex">
 
                         <div class="card card-table flex-fill">

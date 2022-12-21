@@ -5,7 +5,7 @@ namespace App\Repositories;
 use App\Models\User;
 use Illuminate\Support\Facades\Schema;
 
-class UserRepository
+class UserRepository extends BaseRepository
 {
     public const SORT_TYPES = ['desc', 'asc'];
 
