@@ -26,10 +26,10 @@ class StoreUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required'],
-            'email' => ['unique:users,email', 'email'],
-            'phone' => ['unique:users,phone', 'numeric'],
-            'password' => ['required', Password::min(6)->symbols()]
+            'name' => ['required','max:255'],
+            'email' => ['unique:users,email', 'email', 'max:255'],
+            'phone' => ['unique:users,phone', 'numeric','max:255'],
+            'password' => ['required', Password::min(6)->symbols(), 'max:255']
         ];
     }
 }

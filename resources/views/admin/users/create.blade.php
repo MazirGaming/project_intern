@@ -10,7 +10,7 @@
                             </div>
                             
                             <div class="card-body">
-                                @include('admin.partitions._form')
+                                @include('admin.users._form')
                             </div>
                         </div>
                     </div>
