@@ -158,26 +158,6 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
-        'name' => [
-            'required' => 'Bạn cần phải nhập :attribute',
-        ],
-        'password' => [
-            'required' => 'Bạn cần nhập :attribute',
-            'min' => [
-                'string' => ':attribute phải có ít nhất :min ký tự.',
-            ],
-            'symbols' => ':attribute có ít nhất 1 ký tự đặc biệt !@#$%^&*',
-        ],
-        'email' => [
-            'unique' => ':attribute đã tồn tại.',
-            'required' => 'Bạn cần nhập :attribute',
-            'not_regex' => ':attribute không đúng định dạng',
-        ],
-        'phone' => [
-            'unique' => ':attribute đã tồn tại.',
-            'required' => 'Bạn cần nhập :attribute',
-            'numeric' => ':attribute phải là số.',
-        ],
     ],
 
     /*

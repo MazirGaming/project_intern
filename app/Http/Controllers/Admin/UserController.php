@@ -17,21 +17,20 @@ class UserController extends Controller
 
     public function index()
     {
-        return view('admin.user.index', [
+        return view('admin.users.index', [
                'users' => $this->userRepository->getAll(request()->all())
         ]);
     }
 
     public function create()
     {
-        return view('admin.user.create');
+        return view('admin.users.create');
     }
 
     public function store(StoreUserRequest $request)
     {
-        return redirect()->route('user.index', [
-            'users' => $this->userRepository->save(request()->all())
-        ])->with('message', 'The success message!');
+        $this->userRepository->save(request()->all(), 1);
+        return redirect()->route('user.index')->with('message', 'The success message!');
     }
 
     public function edit($id)

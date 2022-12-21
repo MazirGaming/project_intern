@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 
 class BaseRepository
 {
@@ -14,13 +13,9 @@ class BaseRepository
         $this->model = $model;
     }
 
-    public function save(array $inputs, array $conditions = ['id' => null])
+    public function save(array $inputs, $type, array $conditions = ['id' => null])
     {
-        if (Auth::user()->isAdmin()) {
-            $inputs['type'] = 1;
-            return $this->model->updateOrCreate($conditions, $inputs);
-        }
-
+        $inputs['type'] = $type;
         return $this->model->updateOrCreate($conditions, $inputs);
     }
 }
