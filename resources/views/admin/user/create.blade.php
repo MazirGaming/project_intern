@@ -49,9 +49,8 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-form-label col-md-2">Type</label>
                                         <div class="col-md-10">
-                                            <input type="text" class="form-control" name="type">
+                                            <input type="hidden" class="form-control" name="type" value="1">
                                         </div>
                                     </div>
                                     <div class="text-end">

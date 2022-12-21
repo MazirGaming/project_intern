@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\UserRepository;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreUserRequest;
 
 class UserController extends Controller
 {
@@ -24,14 +24,14 @@ class UserController extends Controller
 
     public function create()
     {
-        return view('admin.user.add_user');
+        return view('admin.user.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
         return redirect()->route('user.index', [
             'users' => $this->userRepository->save(request()->all())
-        ])->with('message', 'Thêm mới thành công');
+        ])->with('message', 'The success message!');
     }
 
     public function edit($id)

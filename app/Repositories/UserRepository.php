@@ -4,9 +4,8 @@ namespace App\Repositories;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Validation\Rules\Password;
 
-class UserRepository
+class UserRepository extends BaseRepository
 {
     public const SORT_TYPES = ['desc', 'asc'];
 
@@ -35,28 +34,6 @@ class UserRepository
         if ($validColumn && $validSortType) {
             return $query->orderBy($columnSortName, $columnSortType)->paginate();
         }
-
-        return $query->orderBy('id', 'desc')->paginate();
-    }
-
-    public function save(array $input = [])
-    {
-        $query = $this->model->query();
-
-        $validated = request()->validate([
-            'name' => ['required'],
-            'email' => ['unique:App\Models\User,email', 'regex:/(.+)@(.+)\.(.+)/i'],
-            'phone' => ['unique:App\Models\User,phone', 'numeric'],
-            'password' => ['required', Password::min(6)->symbols()]
-        ]);
-
-        $query->insert([
-            'name' => $input['name'],
-            'phone' => $input['phone'],
-            'email' => $input['email'],
-            'password' => $input['password'],
-            'type' => $input['type']
-        ]);
 
         return $query->orderBy('id', 'desc')->paginate();
     }
