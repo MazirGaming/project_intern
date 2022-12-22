@@ -38,11 +38,9 @@ class UserRepository extends BaseRepository
         return $query->orderBy('id', 'desc')->paginate();
     }
 
-    public function getUser(array $input = [])
+    public function findById(array $input = [])
     {
-        $query = $this->model->query();
-        $query->where('id', 'like', '%' . $input['0'] . '%');
-
-        return $query->orderBy('id', 'desc')->paginate();
+        $query = $this->model->find($input['0']);
+        return $query;
     }
 }

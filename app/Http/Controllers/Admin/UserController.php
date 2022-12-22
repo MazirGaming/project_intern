@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Repositories\UserRepository;
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 
 class UserController extends Controller
@@ -28,7 +29,7 @@ class UserController extends Controller
         return view('admin.users.create');
     }
 
-    public function store(StoreUserRequest $request)
+    public function store(StoreUserRequest $request, $id)
     {
         $inputs = $request->all();
         $inputs['type'] = User::TYPES['admin'];
@@ -39,15 +40,15 @@ class UserController extends Controller
     public function edit($id)
     {
         return view('admin.users.edit', [
-            'user' => $this->userRepository->getUser([$id])
+            'user' => $this->userRepository->findById([$id])
         ]);
     }
 
-    public function update(StoreUserRequest $request, $id)
+    public function update(UpdateUserRequest $request, $id)
     {
         $inputs = $request->all();
         $inputs['type'] = User::TYPES['admin'];
-        $this->userRepository->save($inputs);
+        $this->userRepository->save($inputs, ['id' => $id]);
         return redirect()->route('user.index')->with('message', 'The success message!');
     }
 
