@@ -23,7 +23,14 @@ class UserRepository extends BaseRepository
         if (!empty($input['search'])) {
             $query->where('name', 'like', '%' . $input['search'] . '%')
                            ->orWhere('phone', 'like', '%' . $input['search'] . '%')
-                           ->orWhere('email', 'like', '%' . $input['search'] . '%');
+                           ->orWhere('email', 'like', '%' . $input['search'] . '%')
+                           ->orWhere('type', 'like', '%' . $input['role'] . '%')
+                           ->orWhere('type', 'like', '%' . $input['role'] . '%')
+                           ;
+        } 
+        if (!empty($input['role']))
+        {
+            $query->Where('type', 'like', '%' . $input['role'] . '%');
         }
 
         $columnSortName = $input['column_name'] ?? 'id';

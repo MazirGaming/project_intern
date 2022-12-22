@@ -29,7 +29,7 @@ class UpdateUserRequest extends FormRequest
             'name' => ['required','max:255'],
             'email' => ['required', 'email', 'max:255'],
             'phone' => ['required', 'digits_between:10,11' , 'numeric'],
-            'password' => 'nullable | min:6 | max:255'
+            'password' => ['nullable','min:6','max:255']
         ];
     }
 }

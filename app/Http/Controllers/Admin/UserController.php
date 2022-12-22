@@ -36,7 +36,7 @@ class UserController extends Controller
         $inputs['type'] = User::TYPES['admin'];
         $inputs['password'] = Hash::make($inputs['password']);
         $this->userRepository->save($inputs);
-        return redirect()->route('user.index')->with('message', 'The success message!');
+        return redirect()->route('user.index')->with('message', 'Created successfully!');
     }
 
     public function edit($id)
@@ -52,12 +52,12 @@ class UserController extends Controller
         $inputs['type'] = User::TYPES['admin'];
         $user = $this->userRepository->findById([$id]);
         if ($inputs['password'] == null) {
-            $inputs['password'] = $user['password'];
+            unset($inputs['password']);
         } else {
             $inputs['password'] = Hash::make($inputs['password']);
         }
         $this->userRepository->save($inputs, ['id' => $id]);
-        return redirect()->route('user.index')->with('message', 'The success message!');
+        return redirect()->route('user.index')->with('message', 'Saved successfully!');
     }
 
     public function destroy($id)
