@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Repositories\UserRepository;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
 class UserController extends Controller
@@ -29,10 +30,11 @@ class UserController extends Controller
         return view('admin.users.create');
     }
 
-    public function store(StoreUserRequest $request, $id)
+    public function store(StoreUserRequest $request)
     {
         $inputs = $request->all();
         $inputs['type'] = User::TYPES['admin'];
+        $inputs['password'] = Hash::make($inputs['password']);
         $this->userRepository->save($inputs);
         return redirect()->route('user.index')->with('message', 'The success message!');
     }
@@ -48,6 +50,7 @@ class UserController extends Controller
     {
         $inputs = $request->all();
         $inputs['type'] = User::TYPES['admin'];
+        $inputs['password'] = Hash::make($inputs['password']);
         $this->userRepository->save($inputs, ['id' => $id]);
         return redirect()->route('user.index')->with('message', 'The success message!');
     }
