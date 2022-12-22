@@ -50,7 +50,12 @@ class UserController extends Controller
     {
         $inputs = $request->all();
         $inputs['type'] = User::TYPES['admin'];
-        $inputs['password'] = Hash::make($inputs['password']);
+        $user = $this->userRepository->findById([$id]);
+        if ($inputs['password'] == null) {
+            $inputs['password'] = $user['password'];
+        } else {
+            $inputs['password'] = Hash::make($inputs['password']);
+        }
         $this->userRepository->save($inputs, ['id' => $id]);
         return redirect()->route('user.index')->with('message', 'The success message!');
     }
