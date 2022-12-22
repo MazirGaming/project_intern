@@ -49,7 +49,6 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, $id)
     {
         $inputs = $request->all();
-        $inputs['type'] = User::TYPES['admin'];
         $user = $this->userRepository->findById([$id]);
         if ($inputs['password'] == null) {
             unset($inputs['password']);

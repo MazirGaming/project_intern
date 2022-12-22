@@ -36,11 +36,6 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="form-group row">
-                                        <div class="col-md-10">
-                                            <input type="hidden" class="form-control" name="type">
-                                        </div>
-                                    </div>
                                     <div class="text-end">
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                     </div>
