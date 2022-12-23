@@ -64,9 +64,8 @@ class UserController extends Controller
     {
         if (Auth::user()->id == $id) {
             return redirect()->route('user.index')->with('error', 'Save Fail!');
-        } else {
-            $this->userRepository->delete([$id]);
-            return redirect()->route('user.index')->with('message', 'Deleted successfully!');
-        }
+        } 
+        User::destroy($id);
+        return redirect()->route('user.index')->with('message', 'Deleted successfully!');
     }
 }
