@@ -51,13 +51,7 @@
                                                     <a href="{{route('user.edit', ['user' => $user->id])}}" class="btn btn-sm bg-success-light me-2">
                                                         <i class="fe fe-pencil"></i>
                                                     </a>
-                                                    <form method="POST" action="{{route('user.destroy', ['user' => $user->id])}}">
-                                                        @csrf
-                                                        @method('delete')
-                                                        <div class="form-group">
-                                                        <input type="submit" value="Xóa">
-                                                        </div>
-                                                    </form>
+                                                    <x-delete route="{{route('user.destroy', ['user' => $user->id])}}"></x-delete>
                                                 </div>
                                             </td>   
 </tr>                     
