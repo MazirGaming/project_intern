@@ -20,7 +20,6 @@ class BaseRepository
     public function delete(array $input = [])
     {
         $query = $this->model->where('id', $input['0'])->delete();
-        ;
         return $query;
     }
 }
