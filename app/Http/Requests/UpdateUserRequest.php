@@ -26,8 +26,8 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             'name' => ['required','max:255'],
-            'email' => ['required', 'email', 'max:255'],
-            'phone' => ['required', 'digits_between:10,11' , 'numeric'],
+            'email' => 'required|email|unique:users,email,' . request()->route()->parameters['user'],
+            'phone' => ['required', 'digits_between:10,11', 'numeric'],
             'password' => ['nullable','min:6','max:255']
         ];
     }
