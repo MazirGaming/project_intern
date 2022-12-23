@@ -20,34 +20,16 @@ class UserRepository extends BaseRepository
     {
         $query = $this->model->query();
 
-        if (!empty($input['search']) && !empty($input['role'])) {
-            $query->where([
-                ['type', $input['role']],
-                ['name', 'like', '%' . $input['search'] . '%']
-            ])->orWhere([
-                ['type', $input['role']],
-                ['phone', 'like', '%' . $input['search'] . '%']
-            ])->orWhere([
-                ['type', $input['role']],
-                ['email', 'like', '%' . $input['search'] . '%']
-            ]);           
+        if (!empty($input['search'])) {
+            $query->where(function($query) {
+                $query->where('name', 'like', '%' . request('search') . '%')
+                ->orWhere('phone', 'like', '%' . request('search') . '%')
+                           ->orWhere('email', 'like', '%' . request('search') . '%');
+           });
         }
-        if (!empty($input['search']) && empty($input['role'])) {
-            $query->where('name', 'like', '%' . $input['search'] . '%')
-                           ->orWhere('phone', 'like', '%' . $input['search'] . '%')
-                           ->orWhere('email', 'like', '%' . $input['search'] . '%');
-        } 
-        if( !empty($input['role']) && empty($input['search'])) {
-            $query-> where('type', $input['role']);
+        if (!empty($input['role'])) {
+            $query->where('type', '=', $input['role']);
         }
-        // if (!empty($input['search'])) {
-        //     $query->where('name', 'like', '%' . $input['search'] . '%')
-        //                    ->orWhere('phone', 'like', '%' . $input['search'] . '%')
-        //                    ->orWhere('email', 'like', '%' . $input['search'] . '%');
-        // }
-        // if (!empty($input['role'])) {
-        //     $query->where('type', '=', $input['role']);
-        // }
         $columnSortName = $input['column_name'] ?? 'id';
         $columnSortType = $input['sort_type'] ?? 'desc';
         $validColumn = Schema::hasColumn($this->model-> getTable(), $columnSortName);
