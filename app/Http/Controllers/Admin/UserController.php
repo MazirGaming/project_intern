@@ -8,6 +8,7 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -61,6 +62,11 @@ class UserController extends Controller
 
     public function destroy($id)
     {
-       //
+        if (Auth::user()->id == $id) {
+            return redirect()->route('user.index')->with('error', 'Save Fail!');
+        } else {
+            $this->userRepository->delete([$id]);
+            return redirect()->route('user.index')->with('message', 'Deleted successfully!');
+        }
     }
 }

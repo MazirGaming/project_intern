@@ -16,4 +16,11 @@ class BaseRepository
         $query = $this->model->find($input['0']);
         return $query;
     }
+
+    public function delete(array $input = [])
+    {
+        $query = $this->model->where('id', $input['0'])->delete();
+        ;
+        return $query;
+    }
 }
