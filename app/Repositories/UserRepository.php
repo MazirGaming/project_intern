@@ -21,10 +21,10 @@ class UserRepository extends BaseRepository
         $query = $this->model->query();
 
         if (!empty($input['search'])) {
-            $query->where(function ($query) {
-                $query->where('name', 'like', '%' . request('search') . '%')
-                    ->orWhere('phone', 'like', '%' . request('search') . '%')
-                    ->orWhere('email', 'like', '%' . request('search') . '%');
+            $query->where(function ($query) use($input) {
+                $query->where('name', 'like', '%' . $input['search'] . '%')
+                    ->orWhere('phone', 'like', '%' . $input['search'] . '%')
+                    ->orWhere('email', 'like', '%' . $input['search'] . '%');
             });
         }
 
