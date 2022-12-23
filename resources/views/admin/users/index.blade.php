@@ -41,13 +41,6 @@
                                                 <td>{{$user->phone}}</td>
                                                 <td>{{$user->email}}</td>
                                                 <td>{{$user->role_name}}</td>
-                                                <!-- @if ($user->type == 1)
-                                                <td>Admin</td>
-                                                @elseif ($user->type == 3)
-                                                <td>Student</td>
-                                                @else
-                                                <td></td>
-                                                @endif -->
                                                 <td class="text-end">
                                                 <div class="actions">
                                                     <a href="{{route('user.edit', ['user' => $user->id])}}" class="btn btn-sm bg-success-light me-2">
