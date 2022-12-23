@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Notifications\VerifyEmail;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -55,5 +56,14 @@ class User extends Authenticatable implements MustVerifyEmail
     public function sendEmailVerificationNotification()
     {
         $this->notify((new VerifyEmail)->onQueue('default'));
+    }
+
+    protected function roleName(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                return $this->type === static::TYPES['admin'] ? 'Admin' : 'Student';
+            }
+        );
     }
 }
