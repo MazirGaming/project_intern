@@ -51,7 +51,7 @@
                                                     <a href="{{route('user.edit', ['user' => $user->id])}}" class="btn btn-sm bg-success-light me-2">
                                                         <i class="fe fe-pencil"></i>
                                                     </a>
-                                                    <x-delete route="{{route('user.destroy', ['user' => $user->id])}}"></x-delete>
+                                                    <x-delete route="{{route('user.destroy', ['user' => $user->id])}}" :label="'Xóa'"></x-delete>
                                                 </div>
                                             </td>   
 </tr>                     

@@ -2,6 +2,6 @@
                                                         @csrf
                                                         @method('delete')
                                                         <div class="form-group">
-                                                        <input type="submit" value="Xóa">
+                                                        <input type="submit" value="{{$label}}">
                                                         </div>
                                                     </form>

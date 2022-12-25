@@ -63,8 +63,8 @@ class UserController extends Controller
     public function destroy($id)
     {
         if (Auth::user()->id == $id) {
-            return redirect()->route('user.index')->with('error', 'Save Fail!');
-        } 
+            return redirect()->route('user.index')->with('error', 'Delete Fail!');
+        }
         User::destroy($id);
         return redirect()->route('user.index')->with('message', 'Deleted successfully!');
     }

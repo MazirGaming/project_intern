@@ -7,14 +7,16 @@ use Illuminate\View\Component;
 class Delete extends Component
 {
     public $route;
+    public $label;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($route)
+    public function __construct($route, $label)
     {
         $this->route = $route;
+        $this->label = $label;
     }
 
     /**
@@ -24,6 +26,6 @@ class Delete extends Component
      */
     public function render()
     {
-        return view('components.delete');
+        return view('components.button-delete');
     }
 }
