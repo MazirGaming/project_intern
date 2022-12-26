@@ -4,20 +4,21 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\UserRepository;
+use App\Repositories\CourseRepository;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
-use App\Models\Course;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
     protected $userRepository;
 
-    public function __construct(UserRepository $userRepository)
+    public function __construct(UserRepository $userRepository, CourseRepository $courseRepository)
     {
         $this->userRepository = $userRepository;
+        $this->courseRepository = $courseRepository;
     }
 
     public function index()
@@ -73,12 +74,9 @@ class UserController extends Controller
 
     public function show($id)
     {
-        $courses = Course::join('course_user', 'courses.id', '=', 'course_user.course_id')
-            ->where('user_id', $id)
-            ->get();
         return view('admin.users.details', [
             'user' => $this->userRepository->findById([$id]),
-            'courses' => $courses
+            'courses' => $this->courseRepository->getCourses([$id]),
         ]);
     }
 }

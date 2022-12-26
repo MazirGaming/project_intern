@@ -27,6 +27,7 @@
                                                 <th>name</th>
                                                 <th>slug</th>
                                                 <th>price</th>
+                                                <th>danh mục</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -35,8 +36,10 @@
                                                 <td>{{$course->name}}</td>
                                                 <td>{{$course->slug}}</td>
                                                 <td>{{$course->price}}</td>
+                                                <td>{{$course->category}}</td>
 </tr>                     
                                             @endforeach
+                                            
                                         </tbody>
                                     </table>
 
