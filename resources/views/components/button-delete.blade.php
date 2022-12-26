@@ -1,4 +1,5 @@
-<form method="POST" action="{{$route}}">
+<form method="POST" action="{{$route}}" >
+
                                                         @csrf
                                                         @method('delete')
                                                         <div class="form-group">

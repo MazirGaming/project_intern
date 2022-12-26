@@ -51,7 +51,9 @@
                                                     <a href="{{route('user.edit', ['user' => $user->id])}}" class="btn btn-sm bg-success-light me-2">
                                                         <i class="fe fe-pencil"></i>
                                                     </a>
+                                                    @if($user->id != Auth::user()->id)
                                                     <x-delete route="{{route('user.destroy', ['user' => $user->id])}}" :label="'Xóa'"></x-delete>
+                                                    @endif
                                                 </div>
                                             </td>   
 </tr>                     
