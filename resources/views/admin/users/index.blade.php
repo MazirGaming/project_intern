@@ -8,6 +8,11 @@
         {{ session()->get('message') }}
     </div>
 @endif
+@if(session()->has('error'))
+    <div class="alert alert-danger">
+        {{ session()->get('error') }}
+    </div>
+@endif
 <a href="{{route('user.create')}}">Thêm mới User</a>
 <div class="row">
     
@@ -46,9 +51,7 @@
                                                     <a href="{{route('user.edit', ['user' => $user->id])}}" class="btn btn-sm bg-success-light me-2">
                                                         <i class="fe fe-pencil"></i>
                                                     </a>
-                                                    <a href="{{route('user.destroy', ['user' => $user->id])}}" class="btn btn-sm bg-danger-light">
-                                                        <i class="fe fe-trash"></i>
-                                                    </a>
+                                                    <x-delete userId="{{$user->id}}" currentUserId="{{Auth::user()->id}}" route="{{route('user.destroy', ['user' => $user->id])}}" :label="'Xóa'"></x-delete>
                                                 </div>
                                             </td>   
 </tr>                     
@@ -66,4 +69,9 @@
                     </div>
                 </div>
 @endsection
+
+@push('scripts')
+    <script src="{{asset('assets/js/user.js')}}"></script>
+@endpush
+
 
