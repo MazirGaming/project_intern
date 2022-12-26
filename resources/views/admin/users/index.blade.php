@@ -51,11 +51,7 @@
                                                     <a href="{{route('user.edit', ['user' => $user->id])}}" class="btn btn-sm bg-success-light me-2">
                                                         <i class="fe fe-pencil"></i>
                                                     </a>
-                                                    @if($user->id == Auth::user()->id)
-                                                    <x-delete :onclick="'event.preventDefault();'" route="{{route('user.destroy', ['user' => $user->id])}}" :label="'Xóa'"></x-delete>
-                                                    @else
-                                                    <x-delete :onclick="''" route="{{route('user.destroy', ['user' => $user->id])}}" :label="'Xóa'"></x-delete>
-                                                    @endif
+                                                    <x-delete userId="{{$user->id}}" currentUserId="{{Auth::user()->id}}" route="{{route('user.destroy', ['user' => $user->id])}}" :label="'Xóa'"></x-delete>
                                                 </div>
                                             </td>   
 </tr>                     
@@ -73,5 +69,7 @@
                     </div>
                 </div>
 @endsection
+
+<script src="{{asset('assets/js/user.js')}}"></script>
 
 

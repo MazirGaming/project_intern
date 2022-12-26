@@ -8,18 +8,20 @@ class Delete extends Component
 {
     public $route;
     public $label;
-    public $onclick;
+    public $userId;
+    public $currentUserId;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($route, $label, $onclick)
+    public function __construct($route, $label, $userId, $currentUserId)
     {
         $this->route = $route;
         $this->label = $label;
-        $this->onclick = $onclick;
+        $this->userId = $userId;
+        $this->currentUserId = $currentUserId;
     }
 
     /**

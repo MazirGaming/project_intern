@@ -1,4 +1,4 @@
-<form onclick="{{$onclick}}" id="delete-item" method="POST" action="{{$route}}" 
+<form onclick="deleteUser({{$userId}}, {{$currentUserId}})" id="delete-item" method="POST" action="{{$route}}" 
 >
 
                                                         @csrf
