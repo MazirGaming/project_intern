@@ -9,6 +9,7 @@ class Delete extends Component
     public $route;
     public $label;
     public $onclick;
+
     /**
      * Create a new component instance.
      *
