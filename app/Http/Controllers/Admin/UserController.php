@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -68,5 +69,17 @@ class UserController extends Controller
 
         User::destroy($id);
         return redirect()->route('user.index')->with('message', 'Deleted successfully!');
+    }
+
+    public function show($id)
+    {
+        $courses = DB::table('courses')
+            ->join('course_user', 'courses.id', '=', 'course_user.course_id')
+            ->where('user_id', $id)
+            ->get();
+        return view('admin.users.details', [
+            'user' => $this->userRepository->findById([$id]),
+            'courses' => $courses
+        ]);
     }
 }
