@@ -1,4 +1,5 @@
-<form method="POST" action="{{$route}}" >
+<form onclick="{{$onclick}}" id="delete-item" method="POST" action="{{$route}}" 
+>
 
                                                         @csrf
                                                         @method('delete')
