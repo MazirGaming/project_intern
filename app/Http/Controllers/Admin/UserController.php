@@ -8,8 +8,8 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\Course;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -73,8 +73,7 @@ class UserController extends Controller
 
     public function show($id)
     {
-        $courses = DB::table('courses')
-            ->join('course_user', 'courses.id', '=', 'course_user.course_id')
+        $courses = Course::join('course_user', 'courses.id', '=', 'course_user.course_id')
             ->where('user_id', $id)
             ->get();
         return view('admin.users.details', [
