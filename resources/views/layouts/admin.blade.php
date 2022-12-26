@@ -17,7 +17,7 @@
 
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
 
-    @stack('userscripts')
+    @stack('scripts')
 </head>
 
 <body>
