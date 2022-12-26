@@ -70,6 +70,8 @@
                 </div>
 @endsection
 
-<script src="{{asset('assets/js/user.js')}}"></script>
+@push('userscripts')
+    <script src="{{asset('assets/js/user.js')}}"></script>
+@endpush
 
 
