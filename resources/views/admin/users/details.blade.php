@@ -36,7 +36,7 @@
                                                 <td>{{$course->name}}</td>
                                                 <td>{{$course->slug}}</td>
                                                 <td>{{$course->price}}</td>
-                                                <td>{{$course->category}}</td>
+                                                <td>{{$course->category->name}}</td>
                                             </tr>                     
                                             @endforeach
                                             
