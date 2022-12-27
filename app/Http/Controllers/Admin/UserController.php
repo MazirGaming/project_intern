@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\UserRepository;
+use App\Repositories\CourseRepository;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Support\Facades\Hash;
@@ -14,9 +15,10 @@ class UserController extends Controller
 {
     protected $userRepository;
 
-    public function __construct(UserRepository $userRepository)
+    public function __construct(UserRepository $userRepository, CourseRepository $courseRepository)
     {
         $this->userRepository = $userRepository;
+        $this->courseRepository = $courseRepository;
     }
 
     public function index()
@@ -68,5 +70,13 @@ class UserController extends Controller
 
         User::destroy($id);
         return redirect()->route('user.index')->with('message', 'Deleted successfully!');
+    }
+
+    public function show($id)
+    {
+        return view('admin.users.show', [
+            'user' => $this->userRepository->findById([$id]),
+            'courses' => $this->courseRepository->getByUserId($id),
+        ]);
     }
 }
