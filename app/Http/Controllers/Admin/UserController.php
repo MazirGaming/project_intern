@@ -7,6 +7,7 @@ use App\Repositories\UserRepository;
 use App\Repositories\CourseRepository;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Http\Requests\PasswordRequest;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -78,5 +79,21 @@ class UserController extends Controller
             'user' => $this->userRepository->findById([$id]),
             'courses' => $this->courseRepository->getByUserId($id),
         ]);
+    }
+
+    public function change_password()
+    {
+        return view('admin.users.change_password');
+    }
+
+    public function update_password(PasswordRequest $request)
+    {
+        $inputs = $request->all();
+        if (!(Hash::check($request->get('old-password'), Auth::user()->password))) {
+            return redirect()->back()->with("error", "Your current password does not matches with the password you provided. Please try again.");
+        }
+
+        $this->userRepository->save(['password' => Hash::make($inputs['new_password'])], ['id' => Auth::user()->id]);
+        return redirect()->back()->with("message", "Changed Password");
     }
 }
