@@ -9,7 +9,7 @@
 <div class="col">
 <h3 class="page-title">Thông tin User</h3>
 <ul class="breadcrumb">
-<li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+<li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
 <li class="breadcrumb-item active">Thông tin User</li>
 </ul>
 </div>
@@ -37,7 +37,7 @@
                                                 <td>{{$course->slug}}</td>
                                                 <td>{{$course->price}}</td>
                                                 <td>{{$course->category}}</td>
-</tr>                     
+                                            </tr>                     
                                             @endforeach
                                             
                                         </tbody>
