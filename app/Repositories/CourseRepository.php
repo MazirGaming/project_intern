@@ -11,8 +11,8 @@ class CourseRepository extends BaseRepository
         $this->model = $model;
     }
 
-    public function getByUserId($input)
+    public function getByUserId($userId)
     {
-        return $this->model->whereRelation('Users', 'users.id', $input)->with('category')->get();
+        return $this->model->whereRelation('Users', 'users.id', $userId)->with('category')->get();
     }
 }

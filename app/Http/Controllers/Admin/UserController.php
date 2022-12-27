@@ -74,7 +74,7 @@ class UserController extends Controller
 
     public function show($id)
     {
-        return view('admin.users.details', [
+        return view('admin.users.show', [
             'user' => $this->userRepository->findById([$id]),
             'courses' => $this->courseRepository->getByUserId($id),
         ]);
