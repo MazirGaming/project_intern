@@ -13,4 +13,9 @@ class Section extends Model
     {
         return $this->belongsTo(Lession::class);
     }
+
+    public function course()
+    {
+        return $this->belongsTo(Course::class);
+    }
 }

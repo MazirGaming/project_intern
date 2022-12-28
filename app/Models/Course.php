@@ -14,6 +14,11 @@ class Course extends Model
         return $this->hasOne(CourseUser::class);
     }
 
+    public function sections()
+    {
+        return $this->hasMany(Section::class);
+    }
+
     public function lesson()
     {
         return $this->hasMany(Lesson::class, 'lessons');
