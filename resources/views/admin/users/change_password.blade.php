@@ -15,7 +15,7 @@
 <div class="row">
 
 <h1>Thay đổi mật khẩu</h1>
-<form action="{{route('updatepassword')}}" method="post">
+<form action="{{route('update.password')}}" method="post">
     @csrf
 <div class="form-group row">
 <input class="form-control @error('old-password') is-invalid @enderror" type="password" placeholder="password" name="old-password">

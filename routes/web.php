@@ -23,10 +23,11 @@ Auth::routes(['verify' => true]);
 
 Route::prefix('admin')->middleware(['auth', 'admin.check'])->group(function () {
     Route::resource('user', App\Http\Controllers\Admin\UserController::class);
+    Route::get('/change-password', [App\Http\Controllers\Auth\ConfirmPasswordController::class, 'showForm'])->name('form.change.password');
+    Route::post('/update-password', [App\Http\Controllers\Auth\ConfirmPasswordController::class, 'updatePassword'])->name('update.password');
     Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
 });
-Route::get('/changepassword', [App\Http\Controllers\Auth\ConfirmPasswordController::class, 'showForm'])->name('changepassword');
-Route::post('/updatepassword', [App\Http\Controllers\Auth\ConfirmPasswordController::class, 'updatePassword'])->name('updatepassword');
+
 
 
 
