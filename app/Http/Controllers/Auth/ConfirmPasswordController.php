@@ -7,7 +7,6 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\ConfirmsPasswords;
 use App\Repositories\UserRepository;
 use App\Http\Requests\PasswordRequest;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
 class ConfirmPasswordController extends Controller
