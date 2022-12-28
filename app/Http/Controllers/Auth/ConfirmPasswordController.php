@@ -51,7 +51,9 @@ class ConfirmPasswordController extends Controller
 
     public function updatePassword(PasswordRequest $request)
     {
-        $this->userRepository->save(['password' => Hash::make($request->new_password)], ['id' => Auth::user()->id]);
+        $user = Auth::user();
+        $user->password = bcrypt($request->new_password);
+        $user->save();
         return redirect()->back()->with("message", "Changed Password");
     }
 }
