@@ -47,7 +47,7 @@
                                                 <td> 
                                                     {{$course->name}}
                                                 </td>
-                                                <td>{{$course->category->name ?? null}}</td>
+                                                <td>{{$course->category_id ?? null}}</td>
                                                 <td>{{$course->is_online}}</td>
                                                 <td>{{$course->view_count}}</td>
                                                 <td>{{$course->lessons}}</td>

@@ -21,13 +21,10 @@ class CourseRepository extends BaseRepository
         if (!empty($input['search'])) {
             $query->where(function ($query) use ($input) {
                 $query->where('name', 'like', '%' . $input['search'] . '%')
-                    ->orWhereRelation('category', 'name', 'like', '%' . $input['search'] . '%');
+                    ->orWhere('category_id', 'like', '%' . $input['search'] . '%');
             });
         }
 
-        if (!empty($input['role'])) {
-            $query->where('type', $input['role']);
-        }
         $columnSortName = $input['column_name'] ?? 'id';
         $columnSortType = $input['sort_type'] ?? 'desc';
         $validColumn = Schema::hasColumn($this->model-> getTable(), $columnSortName);
