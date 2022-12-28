@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\ConfirmsPasswords;
 use App\Repositories\UserRepository;
-use App\Repositories\CourseRepository;
 use App\Http\Requests\PasswordRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -39,11 +38,10 @@ class ConfirmPasswordController extends Controller
      *
      * @return void
      */
-    public function __construct(UserRepository $userRepository, CourseRepository $courseRepository)
+    public function __construct(UserRepository $userRepository)
     {
         $this->middleware('auth');
         $this->userRepository = $userRepository;
-        $this->courseRepository = $courseRepository;
     }
 
     public function showForm()

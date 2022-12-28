@@ -4,7 +4,6 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Password;
-use App\Rules\Checkpassword;
 
 class PasswordRequest extends FormRequest
 {
@@ -27,7 +26,7 @@ class PasswordRequest extends FormRequest
     public function rules()
     {
         return [
-            'old-password' => ['required', 'max:255', new Checkpassword],
+            'old-password' => ['required', 'max:255', new CheckCorrectPassword],
             'new_password' => ['required', Password::min(6)->symbols(), 'max:255', 'confirmed'],
         ];
     }

@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Contracts\Validation\InvokableRule;
 
-class Checkpassword implements InvokableRule
+class CheckCorrectPassword implements InvokableRule
 {
     /**
      * Run the validation rule.
