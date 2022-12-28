@@ -31,6 +31,7 @@ class UserRepository extends BaseRepository
         if (!empty($input['role'])) {
             $query->where('type', $input['role']);
         }
+
         $columnSortName = $input['column_name'] ?? 'id';
         $columnSortType = $input['sort_type'] ?? 'desc';
         $validColumn = Schema::hasColumn($this->model-> getTable(), $columnSortName);

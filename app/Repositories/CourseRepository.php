@@ -20,9 +20,12 @@ class CourseRepository extends BaseRepository
 
         if (!empty($input['search'])) {
             $query->where(function ($query) use ($input) {
-                $query->where('name', 'like', '%' . $input['search'] . '%')
-                    ->orWhere('category_id', 'like', '%' . $input['search'] . '%');
+                $query->where('name', 'like', '%' . $input['search'] . '%');
             });
+        }
+
+        if (!empty($input['category_id'])) {
+            $query->where('category_id', $input['category_id']);
         }
 
         $columnSortName = $input['column_name'] ?? 'id';

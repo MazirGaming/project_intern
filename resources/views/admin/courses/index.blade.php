@@ -1,7 +1,16 @@
 @extends('layouts.admin')
 @section('main')
 @push('search')
-    @include('admin.partitions.search')
+    <x-form-search>
+        <x-slot:option>
+            <select name="category_id">
+                <option value=''>Select a category</option>
+                    @foreach ($categories as $category)
+                    <option value='{{ $category->id }}' {{request()->get('category_id') == $category->id ? 'selected' :''}}>{{$category->name }}</option>
+                    @endforeach
+                </select>
+        </x-slot>
+    </x-form-search> 
 @endpush
 @if(session()->has('message'))
     <div class="alert alert-success">
@@ -13,9 +22,7 @@
         {{ session()->get('error') }}
     </div>
 @endif
-<a href="#">Thêm mới Course</a>
 <div class="row">
-    
                     <div class="col-md-12 d-flex">
 
                         <div class="card card-table flex-fill">
@@ -47,17 +54,13 @@
                                                 <td> 
                                                     {{$course->name}}
                                                 </td>
-                                                <td>{{$course->category_id ?? null}}</td>
+                                                <td>{{$course->category->name ?? null}}</td>
                                                 <td>{{$course->is_online}}</td>
                                                 <td>{{$course->view_count}}</td>
                                                 <td>{{$course->lessons}}</td>
                                                 <td>{{count($course->sections)}}</td>
                                                 <td class="text-end">
                                                 <div class="actions">
-                                                    
-
-
-
                                                 </div>
                                             </td>   
 </tr>                     

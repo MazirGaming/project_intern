@@ -1,7 +1,15 @@
 @extends('layouts.admin')
 @section('main')
 @push('search')
-    @include('admin.partitions.search')
+<x-form-search>
+        <x-slot:option>
+            <select name="role">
+                <option value=''>Select a Role</option>
+                    <option value="1" {{request()->get('role') == 1 ? 'selected' :''}}>Admin</option>
+                    <option value="3" {{request()->get('role') == 3 ? 'selected' :''}}>Student</option>
+                </select>
+        </x-slot>
+    </x-form-search> 
 @endpush
 @if(session()->has('message'))
     <div class="alert alert-success">
