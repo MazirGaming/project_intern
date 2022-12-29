@@ -55,10 +55,10 @@
                                                     {{$course->name}}
                                                 </td>
                                                 <td>{{$course->category->name ?? null}}</td>
-                                                <td>{{$course->is_online}}</td>
+                                                <td>{{$course->online}}</td>
                                                 <td>{{$course->view_count}}</td>
-                                                <td>{{$course->lessons}}</td>
-                                                <td>{{count($course->sections)}}</td>
+                                                <td>{{$course->lessons_count}}</td>
+                                                <td>{{$course->sections_count}}</td>
                                                 <td class="text-end">
                                                 <div class="actions">
                                                 </div>

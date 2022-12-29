@@ -16,7 +16,7 @@ class CourseRepository extends BaseRepository
 
     public function getAll(array $input = [])
     {
-        $query = $this->model->query();
+        $query = $this->model->query()->with('category')->withCount(['sections', 'lessons']);
 
         if (!empty($input['search'])) {
             $query->where(function ($query) use ($input) {
