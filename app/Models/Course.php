@@ -10,6 +10,8 @@ class Course extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public const IS_ONLINE = [
         'online' => 1,
         'offline' => 0,

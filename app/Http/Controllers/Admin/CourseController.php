@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Repositories\CourseRepository;
 use App\Repositories\CategoryRepository;
+use App\Http\Requests\StoreCourseRequest;
+use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
 {
@@ -29,18 +31,17 @@ class CourseController extends Controller
 
     public function create()
     {
-        //
+        return view('admin.courses.create', [
+            'categories' =>  $this->categoryRepository->getAll(),
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(StoreCourseRequest $request)
     {
-        //
+        $inputs = $request->all();
+        $inputs['created_by'] = Auth::user()->id;
+        $this->courseRepository->save($inputs);
+        return redirect()->route('course.index')->with('message', 'Created successfully!');
     }
 
     /**
