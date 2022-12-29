@@ -2,7 +2,7 @@
 @section('main')
 @push('search')
     <x-form-search>
-        <x-slot:option>
+        <x-slot:slot>
             <select name="category_id">
                 <option value=''>Select a category</option>
                     @foreach ($categories as $category)

@@ -5,22 +5,25 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Repositories\CourseRepository;
-use App\Models\Category;
+use App\Repositories\CategoryRepository;
 
 class CourseController extends Controller
 {
     protected $courseRepository;
 
-    public function __construct(CourseRepository $courseRepository)
+    protected $categoryRepository;
+
+    public function __construct(CourseRepository $courseRepository, CategoryRepository $categoryRepository)
     {
         $this->courseRepository = $courseRepository;
+        $this->categoryRepository = $categoryRepository;
     }
 
     public function index()
     {
         return view('admin.courses.index', [
             'courses' => $this->courseRepository->getAll(request()->all()),
-            'categories' => Category::all(),
+            'categories' =>  $this->categoryRepository->getAll(),
         ]);
     }
 
