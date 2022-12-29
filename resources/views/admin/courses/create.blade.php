@@ -9,14 +9,9 @@
                 <a href="{{route('course.index')}}">Danh sách Khóa học</a>
             </div>     
             <div class="card-body">
-            <form action="{{route('course.store')}}" method="post">
+            <form name="myform" id="myform" action="{{route('course.store')}}" method="post">
                 @include('admin.courses._form')
-                <select name="category_id">
-                <option value=''>Select a category</option>
-                    @foreach ($categories as $category)
-                    <option value='{{ $category->id }}' {{request()->get('category_id') == $category->id ? 'selected' :''}}>{{$category->name }}</option>
-                    @endforeach
-                </select>
+                
             </form>
             </div>
         </div>

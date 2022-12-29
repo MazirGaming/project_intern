@@ -19,11 +19,11 @@ class StoreCourseRequest extends FormRequest
             'link' => ['max:255'],
             'price' => ['numeric','digits_between:1,17'],
             'old_price' => ['numeric','digits_between:1,17'],
-            'content' => ['required'],
-            'description' => ['required'],
-            'meta_title' => ['max:255'],
-            'meta_desc' => ['max:255'],
-            'meta_keyword' => ['max:255'],
+            'content' => ['nullable', 'string'],
+            'description' => ['nullable', 'string'],
+            'meta_title' => ['max:255','nullable', 'string'],
+            'meta_desc' => ['max:255','nullable', 'string'],
+            'meta_keyword' => ['max:255','nullable', 'string'],
         ];
     }
 }

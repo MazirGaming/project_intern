@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{{asset('assets/plugins/morris/morris.css')}}">
 
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/test.css')}}">
 
     @stack('scripts')
 </head>
