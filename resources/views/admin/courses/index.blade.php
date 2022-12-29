@@ -1,12 +1,13 @@
 @extends('layouts.admin')
 @section('main')
 @push('search')
-<x-form-search>
-        <x-slot:option>
-            <select name="role">
-                <option value=''>Select a Role</option>
-                    <option value="1" {{request()->get('role') == 1 ? 'selected' :''}}>Admin</option>
-                    <option value="3" {{request()->get('role') == 3 ? 'selected' :''}}>Student</option>
+    <x-form-search>
+        <x-slot:slot>
+            <select name="category_id">
+                <option value=''>Select a category</option>
+                    @foreach ($categories as $category)
+                    <option value='{{ $category->id }}' {{request()->get('category_id') == $category->id ? 'selected' :''}}>{{$category->name }}</option>
+                    @endforeach
                 </select>
         </x-slot>
     </x-form-search> 
@@ -21,9 +22,7 @@
         {{ session()->get('error') }}
     </div>
 @endif
-<a href="{{route('user.create')}}">Thêm mới User</a>
 <div class="row">
-    
                     <div class="col-md-12 d-flex">
 
                         <div class="card card-table flex-fill">
@@ -37,38 +36,38 @@
                                                 <x-sort-url :columnName="'id'"></x-sort-url>
                                                 </th>
                                                 <th>
-                                                    Name
+                                                    Tên khóa học
                                                 <x-sort-url :columnName="'name'"></x-sort-url>
                                                 </th>
-                                                <th>Phone</th>
-                                                <th>Email</th>
-                                                <th>Role</th>
+                                                <th>Tên danh mục</th>
+                                                <th>Trạng thái</th>
+                                                <th>Tổng số học viên</th>
+                                                <th>Tổng số bài học</th>
+                                                <th>Tổng số chương</th>
                                                 <th class="text-end">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($users as $user)   
+                                            @foreach($courses as $course)   
                                             <tr>
-                                                <td>{{$user->id}}</td>
+                                                <td>{{$course->id}}</td>
                                                 <td> 
-                                                    <a href="{{route('user.show', ['user' => $user->id])}}">{{$user->name}}</a>
+                                                    {{$course->name}}
                                                 </td>
-                                                <td>{{$user->phone}}</td>
-                                                <td>{{$user->email}}</td>
-                                                <td>{{$user->role_name}}</td>
+                                                <td>{{$course->category->name ?? null}}</td>
+                                                <td>{{$course->course_type}}</td>
+                                                <td>{{$course->view_count}}</td>
+                                                <td>{{$course->lessons_count}}</td>
+                                                <td>{{$course->sections_count}}</td>
                                                 <td class="text-end">
                                                 <div class="actions">
-                                                    <a href="{{route('user.edit', ['user' => $user->id])}}" class="btn btn-sm bg-success-light me-2">
-                                                        <i class="fe fe-pencil"></i>
-                                                    </a>
-                                                    <x-delete userId="{{$user->id}}" currentUserId="{{Auth::user()->id}}" route="{{route('user.destroy', ['user' => $user->id])}}" :label="'Xóa'"></x-delete>
                                                 </div>
                                             </td>   
 </tr>                     
                                             @endforeach
                                         </tbody>
                                     </table>
-                                    {{ $users->appends(request()->all())->links() }}
+                                    {{ $courses->appends(request()->all())->links() }}
                                     
                                 </div>
                                 
@@ -80,8 +79,5 @@
                 </div>
 @endsection
 
-@push('scripts')
-    <script src="{{asset('assets/js/user.js')}}"></script>
-@endpush
 
 
