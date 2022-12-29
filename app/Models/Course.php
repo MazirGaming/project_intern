@@ -40,7 +40,7 @@ class Course extends Model
         return $this->belongsTo(Category::class);
     }
 
-    protected function online(): Attribute
+    protected function courseType(): Attribute
     {
         return Attribute::make(
             get: function () {
