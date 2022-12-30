@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Repositories\CourseRepository;
 use App\Repositories\CategoryRepository;
 use App\Http\Requests\StoreCourseRequest;
+use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
 {
@@ -36,11 +37,9 @@ class CourseController extends Controller
     }
 
     public function store(StoreCourseRequest $request)
-    {
+    {   
         $inputs = $request->all();
         unset($inputs['submit']);
-        $inputs['benefits'] = explode(",", $inputs['benefits']);
-        $inputs['benefits'] = json_encode($inputs['benefits']);
         $this->courseRepository->save($inputs);
         return redirect()->route('course.index')->with('message', 'Created successfully!');
     }

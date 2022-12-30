@@ -9,9 +9,8 @@
                 <a href="{{route('course.index')}}">Danh sách Khóa học</a>
             </div>     
             <div class="card-body">
-            <form name="myform" id="myform" action="{{route('course.store')}}" method="post">
+            <form name="formCourse" id="formCourse" action="{{route('course.store')}}" method="post">
                 @include('admin.courses._form')
-                
             </form>
             </div>
         </div>

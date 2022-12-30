@@ -19,6 +19,8 @@ class Course extends Model
 
         self::creating(function ($model) {
             $model['created_by'] = Auth::user()->id;
+            $model['benefits'] = explode(",", $model['benefits']);
+            $model['benefits'] = json_encode($model['benefits'] );
         });
     }
 

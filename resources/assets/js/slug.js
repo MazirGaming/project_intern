@@ -1,7 +1,8 @@
+
 function ChangeToSlug()
 {
     var title, slug;
- 
+    console.log(1);
     title = document.getElementById("title").value;
  
     slug = title.toLowerCase();

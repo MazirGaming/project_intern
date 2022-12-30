@@ -1,4 +1,5 @@
 
+
   @csrf
                                     <div class="form-group row">
                                         <label class="col-form-label col-md-2">Tên khóa học</label>
@@ -104,105 +105,25 @@
                                             @enderror
                                         </div>
                                     </div>
+                                    
+
                                     <div class="form-group row">
                                         <label class="col-form-label col-md-2">Benefits</label>
                                         <div class="col-md-10">
-
-                                        <input id="benefits" type="text" class="form-control @error('benefits') is-invalid @enderror" name="benefits" value="">
-
-                                            @error('benefits')
-                                                <div class="invalid-feedback">{{$message}}</div>
-                                            @enderror
+                                            <div class="input-group">
+                                                <input class="form-control" type="text" id="valueInput" name="benefits" placeholder="Input text here...">
+                                                <div class="input-group-append">
+                                                    <span class="btn btn-primary" onclick="addToDoList()">Add</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8" id="table"></div>
                                         </div>
                                     </div>
-                                    <div id="myDIV" class="header1">
-                                            <h2 style="margin:5px">My To Do List</h2>
-                                            <input type="text" id="myInput" placeholder="Title...">
-                                            <span onclick="newElement()" class="addBtn">Add</span>
-                                            </div>
-
-                                            <ul id="myUL">
-                                            <li>Hit the gym</li>
-                                            <li class="checked">Pay bills</li>
-                                            <li>Meet George</li>
-                                            <li>Buy eggs</li>
-                                            <li>Read a book</li>
-                                            <li>Organize office</li>
-                                            </ul>
 
                                     <div class="text-end">
-                                        <button type="submit" class="btn btn-primary" name="submit" onclick="DoSubmit()">Submit</button>
+                                        <button type="submit" class="btn btn-primary" name="submit" onclick="submitValue();">Submit</button>
                                     </div>
 @push('scripts')
     <script src="{{asset('assets/js/slug.js')}}"></script>
+    <script src="{{asset('assets/js/benefit.js')}}"></script>
 @endpush
-<script>
-    // Create a "close" button and append it to each list item
-var myNodelist = document.getElementsByTagName("LI");
-var i;
-for (i = 0; i < myNodelist.length; i++) {
-  var span = document.createElement("SPAN");
-  var txt = document.createTextNode("\u00D7");
-  span.className = "close";
-  span.appendChild(txt);
-  myNodelist[i].appendChild(span);
-}
-
-// Click on a close button to hide the current list item
-var close = document.getElementsByClassName("close");
-var i;
-for (i = 0; i < close.length; i++) {
-  close[i].onclick = function() {
-    var div = this.parentElement;
-    div.style.display = "none";
-  }
-}
-
-// Add a "checked" symbol when clicking on a list item
-var list = document.querySelector('ul');
-list.addEventListener('click', function(ev) {
-  if (ev.target.tagName === 'LI') {
-    ev.target.classList.toggle('checked');
-  }
-}, false);
-
-
-
-var arr = [];
-
-// Create a new list item when clicking on the "Add" button
-function newElement() {
-  var li = document.createElement("li");
-  var inputValue = document.getElementById("myInput").value;
-  var t = document.createTextNode(inputValue);
-  var input = document.getElementById("benefits").value;
-  li.appendChild(t);
-  arr.push(inputValue);  
-
-  if (inputValue === '') {
-    alert("You must write something!");
-  } else {
-    document.getElementById("myUL").appendChild(li);
-  }
-  document.getElementById("myInput").value = "";
-
-  var span = document.createElement("SPAN");
-  var txt = document.createTextNode("\u00D7");
-  span.className = "close";
-  span.appendChild(txt);
-  li.appendChild(span);
-
-  for (i = 0; i < close.length; i++) {
-    close[i].onclick = function() {
-      var div = this.parentElement;
-      div.style.display = "none";
-    }
-  }
-}
-
-function DoSubmit(){
-  document.myform.benefits.value = arr;
-  document.getElementById("myform").submit();
-}
-
-</script>
