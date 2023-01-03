@@ -108,10 +108,10 @@
                                     
 
                                     <div class="form-group row">
-                                        <label class="col-form-label col-md-2">Benefits</label>
+                                        <label class="col-form-label col-md-2">Add-Benefits</label>
                                         <div class="col-md-10">
                                             <div class="input-group">
-                                                <input class="form-control" type="text" id="valueInput" name="benefits" placeholder="Input text here...">
+                                                <input class="form-control" type="text" id="valueInput" name="add-benefits" placeholder="Input text here...">
                                                 <div class="input-group-append">
                                                     <span class="btn btn-primary" onclick="addToDoList()">Add</span>
                                                 </div>
@@ -120,8 +120,18 @@
                                         </div>
                                     </div>
 
+                                    <div class="form-group row">
+                                        <label class="col-form-label col-md-2">Benefits</label>
+                                        <div class="col-md-10">
+                                            <input type="text" id="benefits" class="form-control @error('benefits') is-invalid @enderror" name="benefits" value="{{$course->benefits ?? old('meta_desc') }}">
+                                            @error('benefits')
+                                                <div class="invalid-feedback">{{$message}}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+
                                     <div class="text-end">
-                                        <button type="submit" class="btn btn-primary" name="submit" onclick="submitValue();">Submit</button>
+                                        <button type="submit" class="btn btn-primary" name="submit" >Submit</button>
                                     </div>
 @push('scripts')
     <script src="{{asset('assets/js/slug.js')}}"></script>
