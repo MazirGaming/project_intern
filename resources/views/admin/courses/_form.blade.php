@@ -116,14 +116,16 @@
                                                     <span class="btn btn-primary" onclick="addToDoList()">Add</span>
                                                 </div>
                                             </div>
-                                            <div class="col-md-8" id="table"></div>
+                                            <div class="col-md-8" id="table">
+                                                
+                                            </div>
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
                                         <label class="col-form-label col-md-2">Benefits</label>
                                         <div class="col-md-10">
-                                            <input type="text" id="benefits" class="form-control @error('benefits') is-invalid @enderror" name="benefits" value="{{$course->benefits ?? old('meta_desc') }}">
+                                            <input type="text" id="benefits" class="form-control @error('benefits') is-invalid @enderror" name="benefits" value="{{$course->benefits ?? old('benefits') }}">
                                             @error('benefits')
                                                 <div class="invalid-feedback">{{$message}}</div>
                                             @enderror
