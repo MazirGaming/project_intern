@@ -13,6 +13,22 @@ class Course extends Model
 
     protected $guarded = [];
 
+    protected $fillable = [
+        'name',
+        'slug',
+        'link',
+        'price',
+        'created_by',
+        'category_id',
+        'old_price',
+        'benefits',
+        'description',
+        'content',
+        'meta_title',
+        'meta_desc',
+        'meta_keyword',
+    ];
+
     public static function boot()
     {
         parent::boot();

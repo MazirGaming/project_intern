@@ -38,8 +38,6 @@ class CourseController extends Controller
     public function store(StoreCourseRequest $request)
     {
         $inputs = $request->all();
-        unset($inputs['submit']);
-        unset($inputs['add-benefits']);
         $this->courseRepository->save($inputs);
         return redirect()->route('course.index')->with('message', 'Created successfully!');
     }
