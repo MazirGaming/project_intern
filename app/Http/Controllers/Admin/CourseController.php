@@ -37,8 +37,7 @@ class CourseController extends Controller
 
     public function store(StoreCourseRequest $request)
     {
-        $inputs = $request->all();
-        $this->courseRepository->save($inputs);
+        $this->courseRepository->save($request->all());
         return redirect()->route('course.index')->with('message', 'Created successfully!');
     }
 
