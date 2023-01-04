@@ -22,6 +22,8 @@
         {{ session()->get('error') }}
     </div>
 @endif
+<a href="{{route('course.create')}}">Thêm mới Course</a>
+
 <div class="row">
                     <div class="col-md-12 d-flex">
 

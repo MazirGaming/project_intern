@@ -5,10 +5,42 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Support\Facades\Auth;
 
 class Course extends Model
 {
     use HasFactory;
+
+    protected $guarded = [];
+
+    protected $fillable = [
+        'name',
+        'slug',
+        'link',
+        'price',
+        'created_by',
+        'category_id',
+        'old_price',
+        'benefits',
+        'description',
+        'content',
+        'meta_title',
+        'meta_desc',
+        'meta_keyword',
+    ];
+
+    public static function boot()
+    {
+        parent::boot();
+
+        self::creating(function ($model) {
+            $model['created_by'] = Auth::user()->id;
+            if (!empty($model['benefits'])) {
+                $model['benefits'] = explode(",", $model['benefits']);
+                $model['benefits'] = json_encode($model['benefits']);
+            }
+        });
+    }
 
     public const IS_ONLINE = [
         'online' => 1,
