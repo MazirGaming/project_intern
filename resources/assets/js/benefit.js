@@ -1,5 +1,5 @@
-
 var toDoList = [];
+
 function addToDoList() {
     let valueInput = document.getElementById("valueInput").value;
     if (valueInput) {
@@ -30,12 +30,23 @@ function deleteList(index) {
     document.formCourse.benefits.value = toDoList;
 }
 
-window.onload = function()
+
+window.onload = function() 
 {   
     var oldValue = document.getElementById("benefits").value;
     toDoList = [];
-    if (oldValue != ''){
-        toDoList =  document.getElementById("benefits").value.split(",",);
-        renderToDoList(toDoList);
+    if (oldValue != '') {
+        for (i=0; i<oldValue.length; i++) {
+            if (oldValue[0] == '[' || oldValue[oldValue.length] == ']') {
+                oldValue = oldValue.slice(0, -1)
+                oldValue = oldValue.substr(1)
+                oldValue = oldValue.replace(/"/g, '')
+                oldValue = oldValue.split(", ",);
+                toDoList = oldValue;
+                return renderToDoList(toDoList);
+            }
+            toDoList =  document.getElementById("benefits").value.split(",",);
+            return renderToDoList(toDoList);
+        }
     }
 };

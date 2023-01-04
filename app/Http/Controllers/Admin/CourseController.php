@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Repositories\CourseRepository;
 use App\Repositories\CategoryRepository;
 use App\Http\Requests\StoreCourseRequest;
+use App\Http\Requests\UpdateCourseRequest;
 
 class CourseController extends Controller
 {
@@ -24,14 +24,14 @@ class CourseController extends Controller
     {
         return view('admin.courses.index', [
             'courses' => $this->courseRepository->getAll(request()->all()),
-            'categories' =>  $this->categoryRepository->getAll(),
+            'categories' => $this->categoryRepository->getAll(),
         ]);
     }
 
     public function create()
     {
         return view('admin.courses.create', [
-            'categories' =>  $this->categoryRepository->getAll(),
+            'categories' => $this->categoryRepository->getAll(),
         ]);
     }
 
@@ -41,38 +41,25 @@ class CourseController extends Controller
         return redirect()->route('course.index')->with('message', 'Created successfully!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        return view('admin.courses.edit', [
+            'course' => $this->courseRepository->findById([$id]),
+            'categories' => $this->categoryRepository->getAll()
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(UpdateCourseRequest $request, $id)
     {
-        //
+        $inputs = $request->all();
+        $course = $this->courseRepository->findById([$id]);
+        $this->courseRepository->save($inputs, ['id' => $id]);
+        return redirect()->route('course.index')->with('message', 'Saved successfully!');
     }
 
     /**
