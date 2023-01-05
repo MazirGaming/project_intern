@@ -1,5 +1,5 @@
-
 var toDoList = [];
+
 function addToDoList() {
     let valueInput = document.getElementById("valueInput").value;
     if (valueInput) {
@@ -15,7 +15,7 @@ function renderToDoList(toDoList) {
     toDoList.map((value, index)=>{
         valueInput += `
             <div class="input-group">
-                <input class="form-control" type="text" value="${value}" disabled="disabled">
+                <input name="addValue" id="addValue" class="form-control addValue" type="text" value="${value}" disabled="disabled">
                 <div class="input-group-append">
                     <span class="btn btn-primary" onclick="deleteList(${index})">Delete</span>
                 </div>
@@ -30,12 +30,15 @@ function deleteList(index) {
     document.formCourse.benefits.value = toDoList;
 }
 
-window.onload = function()
+window.onload = function() 
 {   
     var oldValue = document.getElementById("benefits").value;
     toDoList = [];
-    if (oldValue != ''){
+    if (oldValue != '') {
         toDoList =  document.getElementById("benefits").value.split(",",);
         renderToDoList(toDoList);
     }
+    toDoList = JSON.parse(oldValue)
+    document.getElementById("benefits").value = toDoList
+    renderToDoList(toDoList);
 };

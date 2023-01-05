@@ -40,6 +40,14 @@ class Course extends Model
                 $model['benefits'] = json_encode($model['benefits']);
             }
         });
+
+        self::updating(function ($model) {
+            $model['created_by'] = Auth::user()->id;
+            if (!empty($model['benefits'])) {
+                $model['benefits'] = explode(",", $model['benefits']);
+                $model['benefits'] = json_encode($model['benefits']);
+            }
+        });
     }
 
     public const IS_ONLINE = [
