@@ -34,13 +34,7 @@ window.onload = function()
 {   
     var oldValue = document.getElementById("benefits").value;
     toDoList = [];
-    if (oldValue != '') {
-        toDoList =  document.getElementById("benefits").value.split(",",);
-        renderToDoList(toDoList);
-    }
-    addValue = document.getElementsByName("addValue");
-    addValue = JSON.parse(oldValue)
-    document.getElementById("benefits").value = addValue
-    toDoList = addValue
+    toDoList = JSON.parse(oldValue)
+    document.getElementById("benefits").value = toDoList
     renderToDoList(toDoList);
 };
