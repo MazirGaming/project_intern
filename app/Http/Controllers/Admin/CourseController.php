@@ -37,7 +37,20 @@ class CourseController extends Controller
 
     public function store(StoreCourseRequest $request)
     {
-        $this->courseRepository->save($request->all());
+        $inputs = $request->all();
+        if (!$request->hasFile('photo')) {
+            return redirect()->back()->with("error", "You need upload image");
+        }
+
+        $path = $request->file('photo')->store('public');
+        $path = substr($path, strlen('public/'));
+        $course = $this->courseRepository->save($inputs);
+        $course->attachment()->create([
+            'file_path' => $path,
+            'attachable_id' => $course['id'],
+            'attachable_typ' => 'App\Models\Course',
+        ]);
+
         return redirect()->route('course.index')->with('message', 'Created successfully!');
     }
 

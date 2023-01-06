@@ -1,6 +1,12 @@
 
 
   @csrf
+  @if(session()->has('error'))
+    <div class="alert alert-danger">
+        {{ session()->get('error') }}
+    </div>
+@endif
+
 <div class="form-group row">
     <label class="col-form-label col-md-2">Tên khóa học</label>
     <div class="col-md-10">
@@ -130,9 +136,14 @@
     </div>
 </div>
 
+<div class="form-group">
+  <label for="photo">Attach a photograph</label>
+  <input type="file" name="photo" id="photo" accept="image/*" class="form-control-file">
+</div>
 <div class="text-end">
     <button type="submit" class="btn btn-primary" name="submit" >Submit</button>
 </div>
+
 @push('scripts')
     <script src="{{asset('assets/js/slug.js')}}"></script>
     <script src="{{asset('assets/js/benefit.js')}}"></script>

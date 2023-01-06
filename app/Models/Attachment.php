@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Attachment extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['file_path', 'attachbale_id', 'attachable_type'];
+
+    public function attachable()
+    {
+        return $this->morphTo();
+    }
 }
