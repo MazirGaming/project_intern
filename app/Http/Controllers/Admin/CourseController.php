@@ -47,13 +47,13 @@ class CourseController extends Controller
         if (!$request->hasFile('photo')) {
             return redirect()->back()->with("error", "You need upload image");
         }
-
+        
         DB::transaction(function () use ($inputs) {
             $course = $this->courseRepository->save($inputs);
             $course->attachment()->create([
                 'file_path' => $inputs['photo']->store('public/attachments'),
                 'attachable_id' => $course['id'],
-                'file_name' => substr($inputs['photo']->store('public/attachments'), strlen('public/attachments/')),
+                'file_name' => $inputs['photo']->hashName(),
                 'attachable_type' => Course::class,
                 'extension' => $inputs['photo']->extension(),
                 'size' => $inputs['photo']->getSize(),

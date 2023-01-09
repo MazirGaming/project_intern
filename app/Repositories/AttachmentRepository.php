@@ -15,7 +15,7 @@ class AttachmentRepository extends BaseRepository
     {
         return $this->model->where('attachments.attachable_id', $id)->update([
             'file_path' => $inputs['photo']->store('public/attachments'),
-            'file_name' => substr($inputs['photo']->store('public/attachments'), strlen('public/attachments/')),
+            'file_name' => $inputs['photo']->hashName(),
             'extension' => $inputs['photo']->extension(),
             'size' => $inputs['photo']->getSize(),
             'mime_type' => $inputs['photo']->getClientMimeType()
