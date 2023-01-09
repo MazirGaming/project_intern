@@ -137,7 +137,10 @@
 </div>
 <div class="form-group">
     <label for="photo">Attach a photograph</label>
-    <input type="file" name="photo" id="photo" accept="image/*" class="form-control-file">
+    <input type="file" name="photo" id="photo" accept="image/*" class="form-control-file @error('photo') is-invalid @enderror">
+    @error('photo')
+            <div class="invalid-feedback">{{$message}}</div>
+    @enderror
 </div>
 <div class="text-end">
     <button type="submit" class="btn btn-primary" name="submit" >Submit</button>
