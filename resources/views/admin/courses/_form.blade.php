@@ -135,14 +135,18 @@
         @enderror
     </div>
 </div>
-
 <div class="form-group">
-  <label for="photo">Attach a photograph</label>
-  <input type="file" name="photo" id="photo" accept="image/*" class="form-control-file">
+    <label for="photo">Attach a photograph</label>
+    <input type="file" name="photo" id="photo" accept="image/*" class="form-control-file">
 </div>
 <div class="text-end">
     <button type="submit" class="btn btn-primary" name="submit" >Submit</button>
 </div>
+
+@if(request()->route()->getName() == 'course.edit')
+    <img src="{{asset('storage/attachments/'.$course->attachment->file_name)}}" class="card-img-top" alt="...">
+@endif
+
 
 @push('scripts')
     <script src="{{asset('assets/js/slug.js')}}"></script>

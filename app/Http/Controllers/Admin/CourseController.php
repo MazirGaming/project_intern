@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Repositories\CourseRepository;
 use App\Repositories\CategoryRepository;
+use App\Repositories\AttachmentRepository;
 use App\Http\Requests\StoreCourseRequest;
 use App\Http\Requests\UpdateCourseRequest;
+use Illuminate\Support\Facades\DB;
 
 class CourseController extends Controller
 {
@@ -14,10 +16,14 @@ class CourseController extends Controller
 
     protected $categoryRepository;
 
-    public function __construct(CourseRepository $courseRepository, CategoryRepository $categoryRepository)
-    {
+    public function __construct(
+        CourseRepository $courseRepository,
+        CategoryRepository $categoryRepository,
+        AttachmentRepository $attachmentRepository
+    ) {
         $this->courseRepository = $courseRepository;
         $this->categoryRepository = $categoryRepository;
+        $this->attachmentRepository = $attachmentRepository;
     }
 
     public function index()
@@ -42,14 +48,18 @@ class CourseController extends Controller
             return redirect()->back()->with("error", "You need upload image");
         }
 
-        $path = $request->file('photo')->store('public');
-        $path = substr($path, strlen('public/'));
-        $course = $this->courseRepository->save($inputs);
-        $course->attachment()->create([
-            'file_path' => $path,
-            'attachable_id' => $course['id'],
-            'attachable_typ' => 'App\Models\Course',
-        ]);
+        DB::transaction(function () use ($inputs) {
+            $course = $this->courseRepository->save($inputs);
+            $course->attachment()->create([
+                'file_path' => $inputs['photo']->store('public/attachments'),
+                'attachable_id' => $course['id'],
+                'file_name' => substr($inputs['photo']->store('public/attachments'), strlen('public/attachments/')),
+                'attachable_type' => Course::class,
+                'extension' => $inputs['photo']->extension(),
+                'size' => $inputs['photo']->getSize(),
+                'mime_type' => $inputs['photo']->getClientMimeType()
+            ]);
+        });
 
         return redirect()->route('course.index')->with('message', 'Created successfully!');
     }
@@ -70,8 +80,15 @@ class CourseController extends Controller
     public function update(UpdateCourseRequest $request, $id)
     {
         $inputs = $request->all();
-        $course = $this->courseRepository->findById([$id]);
-        $this->courseRepository->save($inputs, ['id' => $id]);
+        DB::transaction(function () use ($inputs, $id) {
+            if (!empty($inputs['photo'])) {
+                $this->attachmentRepository->updateAttachment($id, $inputs);
+            }
+
+            $course = $this->courseRepository->findById([$id]);
+            $this->courseRepository->save($inputs, ['id' => $id]);
+        });
+
         return redirect()->route('course.index')->with('message', 'Saved successfully!');
     }
 

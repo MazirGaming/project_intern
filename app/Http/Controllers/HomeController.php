@@ -10,8 +10,8 @@ class HomeController extends Controller
 
     public function __construct(CourseRepository $courseRepository)
     {
-        $this->courseRepository = $courseRepository;
         $this->middleware('auth');
+        $this->courseRepository = $courseRepository;
     }
 
     public function index()
