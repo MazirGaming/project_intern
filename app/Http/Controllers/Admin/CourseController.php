@@ -44,16 +44,12 @@ class CourseController extends Controller
     public function store(StoreCourseRequest $request)
     {
         $inputs = $request->all();
-        if (!$request->hasFile('photo')) {
-            return redirect()->back()->with("error", "You need upload image");
-        }
-
         DB::transaction(function () use ($inputs) {
             $course = $this->courseRepository->save($inputs);
             $course->attachment()->create([
-                'file_path' => $inputs['photo']->store('public/attachments'),
+                'file_path' => substr($inputs['photo']->store('public/attachments'), strlen('public/')),
                 'attachable_id' => $course['id'],
-                'file_name' => time().'.'.$inputs['photo']->getClientOriginalExtension(),
+                'file_name' => time() . '.' . $inputs['photo']->getClientOriginalExtension(),
                 'attachable_type' => Course::class,
                 'extension' => $inputs['photo']->extension(),
                 'size' => $inputs['photo']->getSize(),
@@ -80,6 +76,13 @@ class CourseController extends Controller
     public function update(UpdateCourseRequest $request, $id)
     {
         $inputs = $request->all();
+        if (!empty($inputs['photo'])) {
+            if (!empty($inputs['photo'])  && $inputs['photo'] != null) {
+                $file_old = public_path() . '\storage\\' . $inputs['oldPhoto'];
+                unlink($file_old);
+            }
+        }
+
         DB::transaction(function () use ($inputs, $id) {
             if (!empty($inputs['photo'])) {
                 $this->attachmentRepository->updateAttachment($id, $inputs);

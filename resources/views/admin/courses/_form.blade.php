@@ -135,6 +135,7 @@
         @enderror
     </div>
 </div>
+
 <div class="form-group">
     <label for="photo">Attach a photograph</label>
     <input type="file" name="photo" id="photo" accept="image/*" class="form-control-file @error('photo') is-invalid @enderror">
@@ -147,7 +148,8 @@
 </div>
 
 @if(request()->route()->getName() == 'course.edit')
-    <img src="{{asset('storage/attachments/'.$course->attachment->file_name)}}" class="card-img-top" alt="...">
+    <img src="{{asset('storage/'.$course->attachment->file_path)}}" class="card-img-top" alt="...">
+    <input type="hidden" name="oldPhoto" value="{{$course->attachment->file_path}}">
 @endif
 
 
