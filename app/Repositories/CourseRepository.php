@@ -16,7 +16,7 @@ class CourseRepository extends BaseRepository
 
     public function getAll(array $input = [])
     {
-        $query = $this->model->query()->with('category')->withCount(['sections', 'lessons']);
+        $query = $this->model->query()->with(['category', 'attachment'])->withCount(['sections', 'lessons']);
 
         if (!empty($input['search'])) {
             $query->where(function ($query) use ($input) {
@@ -34,10 +34,10 @@ class CourseRepository extends BaseRepository
         $validSortType = in_array(strtolower(trim($columnSortType)), static::SORT_TYPES);
 
         if ($validColumn && $validSortType) {
-            return $query->orderBy($columnSortName, $columnSortType)->paginate();
+            return $query->orderBy($columnSortName, $columnSortType)->paginate(8);
         }
 
-        return $query->orderBy('id', 'desc')->paginate();
+        return $query->orderBy('id', 'desc')->paginate(8);
     }
 
     public function getByUserId($userId)

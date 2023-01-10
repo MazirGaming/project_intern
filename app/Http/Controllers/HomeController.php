@@ -2,25 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\CourseRepository;
+
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    protected $courseRepository;
+
+    public function __construct(CourseRepository $courseRepository)
     {
         $this->middleware('auth');
+        $this->courseRepository = $courseRepository;
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function index()
     {
-        return view('home');
+        return view('home', [
+            'courses' => $this->courseRepository->getAll(request()->all()),
+        ]);
     }
 }

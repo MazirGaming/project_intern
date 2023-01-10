@@ -29,6 +29,11 @@ class Course extends Model
         'meta_keyword',
     ];
 
+    public function attachment()
+    {
+        return $this->morphOne(Attachment::class, 'attachable');
+    }
+
     public static function boot()
     {
         parent::boot();

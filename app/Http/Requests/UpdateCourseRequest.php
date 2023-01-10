@@ -35,6 +35,7 @@ class UpdateCourseRequest extends FormRequest
             'meta_title' => ['max:255','nullable', 'string'],
             'meta_desc' => ['max:255','nullable', 'string'],
             'meta_keyword' => ['max:255','nullable', 'string'],
+            'photo' => ['nullable','image','mimes:jpg,png,jpeg','max:2048']
         ];
     }
 }

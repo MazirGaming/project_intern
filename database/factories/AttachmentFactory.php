@@ -18,7 +18,6 @@ class AttachmentFactory extends Factory
     public function definition()
     {
         return [
-            //
             'file_path' => Str::random(10),
             'attachable_type' => Str::random(10),
             'file_name' => Str::random(10),

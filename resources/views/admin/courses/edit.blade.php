@@ -9,7 +9,7 @@
                 <a href="{{route('course.index')}}">Danh sách Course</a>
             </div>
             <div class="card-body">
-            <form name="formCourse" id="formCourse" action="{{route('course.update', ['course' => $course->id])}}" method="post">
+            <form name="formCourse" id="formCourse" action="{{route('course.update', ['course' => $course->id])}}" method="post" enctype="multipart/form-data">
                 @method('put')
                 @include('admin.courses._form')
             </form>
