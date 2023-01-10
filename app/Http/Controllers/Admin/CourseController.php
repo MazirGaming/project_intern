@@ -9,6 +9,7 @@ use App\Repositories\AttachmentRepository;
 use App\Http\Requests\StoreCourseRequest;
 use App\Http\Requests\UpdateCourseRequest;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class CourseController extends Controller
 {
@@ -43,13 +44,13 @@ class CourseController extends Controller
 
     public function store(StoreCourseRequest $request)
     {
-        $inputs = $request->all();
-        DB::transaction(function () use ($inputs) {
+        DB::transaction(function () use ($request) {
+            $inputs = $request->all();
             $course = $this->courseRepository->save($inputs);
             $course->attachment()->create([
-                'file_path' => substr($inputs['photo']->store('public/attachments'), strlen('public/')),
+                'file_path' => Storage::putFile('public\attachments', $inputs['photo']),
                 'attachable_id' => $course['id'],
-                'file_name' => time() . '.' . $inputs['photo']->getClientOriginalExtension(),
+                'file_name' => $inputs['photo']->hashName(),
                 'attachable_type' => Course::class,
                 'extension' => $inputs['photo']->extension(),
                 'size' => $inputs['photo']->getSize(),
@@ -77,9 +78,8 @@ class CourseController extends Controller
     {
         $inputs = $request->all();
         if (!empty($inputs['photo'])) {
-            if (!empty($inputs['photo'])  && $inputs['photo'] != null) {
-                $file_old = public_path() . '\storage\\' . $inputs['oldPhoto'];
-                unlink($file_old);
+            if (Storage::exists("public\attachments\\" . $inputs['oldPhoto'])) {
+                Storage::delete("public\attachments\\" . $inputs['oldPhoto']);
             }
         }
 

@@ -148,8 +148,8 @@
 </div>
 
 @if(request()->route()->getName() == 'course.edit')
-    <img src="{{asset('storage/'.$course->attachment->file_path)}}" class="card-img-top" alt="...">
-    <input type="hidden" name="oldPhoto" value="{{$course->attachment->file_path}}">
+    <img src="{{asset('storage/attachments/'.$course->attachment->file_name)}}" class="card-img-top" alt="...">
+    <input type="hidden" name="oldPhoto" value="{{$course->attachment->file_name}}">
 @endif
 
 
