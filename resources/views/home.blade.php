@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+@if(session()->has('message'))
+    <div class="alert alert-success">
+        {{ session()->get('message') }}
+    </div>
+@endif
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -22,7 +27,7 @@
                                 <h5 class="card-title">{{$course->name}}</h5>
                                 <p class="card-text">{{$course->content}}</p>
                             </div>
-                            <button><a href="">Mua khóa học</a></button>
+                            <button><a href="{{route('add.to.cart', ['id' => $course->id])}}">Mua khóa học</a></button>
                             </div>
                         </div>
                         @endforeach

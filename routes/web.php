@@ -28,10 +28,6 @@ Route::prefix('admin')->middleware(['auth', 'admin.check'])->group(function () {
     Route::resource('course', App\Http\Controllers\Admin\CourseController::class);
     Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
 });
-
-
-
-
-
-
+Route::get('/cart', [App\Http\Controllers\CartController::class, 'index'])->name('cart.list');
+Route::get('/add-to-cart/{id}', [App\Http\Controllers\CartController::class, 'addToCart'])->name('add.to.cart');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
