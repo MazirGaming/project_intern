@@ -88,7 +88,6 @@ class CourseController extends Controller
                 $this->attachmentRepository->updateAttachment($id, $inputs);
             }
 
-            $course = $this->courseRepository->findById([$id]);
             $this->courseRepository->save($inputs, ['id' => $id]);
         });
 
