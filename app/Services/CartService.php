@@ -4,50 +4,83 @@ namespace App\Services;
 
 class CartService
 {
-    public function insert($course, $id)
+    public function insert($course)
     {
-        return [
-            $id => [
-                "name" => $course->name,
-                "quantity" => 1,
-                "price" => $course->price,
-                "photo" => $course->attachment->file_name
-            ]
+        $cart = session()->get('cart');
+        if (!$cart) {
+            $cart = [
+                    $course->id => [
+                        "name" => $course->name,
+                        "quantity" => 1,
+                        "price" => $course->price,
+                        "photo" => $course->attachment->file_name
+                    ]
+            ];
+            session()->put('cart', $cart);
+            return;
+        }
+
+        if (isset($cart[$course->id])) {
+            $cart[$course->id]['quantity']++;
+            session()->put('cart', $cart);
+            return;
+        }
+
+        $cart[$course->id] = [
+            "name" => $course->name,
+            "quantity" => 1,
+            "price" => $course->price,
+            "photo" => $course->attachment->file_name
         ];
+        session()->put('cart', $cart);
     }
 
-    public function update($cart, $id)
+    public function update($course)
     {
-        return ++$cart[$id]['quantity'];
+        $cart = session()->get('cart');
+        $qty = request()->qty;
+        if (isset($cart[$course->id])) {
+            $cart[$course->id]['quantity'] = $qty;
+            session()->put('cart', $cart);
+        }
     }
 
     public function total($cart)
     {
-        return count($cart);
+        $cart = session()->get('cart');
+        if ($cart) {
+            return count($cart);
+        }
     }
 
-    public function exists($cart, $id)
+    public function exists($course)
     {
-        return isset($cart[$id]);
+        $cart = session()->get('cart');
+        return isset($cart[$course->id]);
     }
 
-    public function find($cart, $id)
+    public function find($course)
     {
-        foreach ($cart as $index => $item) {
-            if ($index == $id) {
-                return $item;
+        $cart = session()->get('cart');
+        if ($cart) {
+            foreach ($cart as $index => $item) {
+                if ($index == $course->id) {
+                    return $item;
+                }
             }
         }
     }
 
-    public function removeItem($cart, $id)
+    public function removeItem($course)
     {
-        foreach ($cart as $index => $item) {
-            if ($index == $id) {
-                unset($cart[$index]);
+        if ($cart) {
+            foreach ($cart as $index => $item) {
+                if ($index == $course->id) {
+                    unset($cart[$index]);
+                }
             }
+            return $cart;
         }
-        return $cart;
     }
 
     public function destroy()

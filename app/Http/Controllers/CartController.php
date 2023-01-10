@@ -26,27 +26,7 @@ class CartController extends Controller
             return "Không tìm thấy sản phẩm";
         }
 
-        $cart = session()->get('cart');
-        if (!$cart) {
-            $cart = $this->cartService->insert($course, $id);
-            session()->put('cart', $cart);
-            return redirect()->back()->with('message', 'Course added to cart successfully1!');
-        }
-
-        if ($this->cartService->exists($cart, $id)) {
-            $cart[$id]['quantity'] = $this->cartService->update($cart, $id);
-            session()->put('cart', $cart);
-            return redirect()->back()->with('message', 'Course added to cart successfully2!');
-        }
-
-        $cart[$id] = [
-            "name" => $course->name,
-            "quantity" => 1,
-            "price" => $course->price,
-            "photo" => $course->attachment->file_name
-        ];
-
-        session()->put('cart', $cart);
-        return redirect()->back()->with('message', 'Course added to cart successfully3!');
+        $this->cartService->insert($course);
+        return redirect()->back()->with('message', 'Course added to cart successfully1!');
     }
 }
