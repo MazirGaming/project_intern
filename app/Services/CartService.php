@@ -6,27 +6,36 @@ class CartService
 {
     public function insert($course)
     {
-        $cart = session()->get('cart');
+        $cart = session()->get('cart') ?? collect();
         if (!$cart) {
-            $cart = [
+            $cart->push([
                     $course->id => [
+                        "id" => $course->id,
                         "name" => $course->name,
                         "quantity" => 1,
                         "price" => $course->price,
                         "photo" => $course->attachment->file_name
                     ]
-            ];
+                ]);
             session()->put('cart', $cart);
             return;
         }
 
         if (isset($cart[$course->id])) {
-            $cart[$course->id]['quantity']++;
+            $cart = $cart->map(function ($item) use ($course) {
+                if ($item['id'] == $course->id) {
+                    ++$item['quantity'];
+                }
+
+                return $item;
+            });
+
             session()->put('cart', $cart);
             return;
         }
 
         $cart[$course->id] = [
+            "id" => $course->id,
             "name" => $course->name,
             "quantity" => 1,
             "price" => $course->price,
@@ -49,42 +58,45 @@ class CartService
     {
         $cart = session()->get('cart');
         if ($cart) {
-            return count($cart);
+            return $cart->count();
         }
     }
 
     public function exists($course)
     {
         $cart = session()->get('cart');
-        return isset($cart[$course->id]);
+        if ($cart) {
+            $cart->where('id', $course->id);
+            return true;
+        }
+
+        return false;
     }
 
     public function find($course)
     {
         $cart = session()->get('cart');
         if ($cart) {
-            foreach ($cart as $index => $item) {
-                if ($index == $course->id) {
-                    return $item;
-                }
-            }
+            return $cart->where('id', $course->id);
         }
     }
 
     public function removeItem($course)
     {
+        $cart = session()->get('cart');
         if ($cart) {
             foreach ($cart as $index => $item) {
                 if ($index == $course->id) {
                     unset($cart[$index]);
                 }
             }
+
             return $cart;
         }
     }
 
     public function destroy()
     {
-        $request->session()->forget('cart');
+        return $request->session()->forget('cart');
     }
 }

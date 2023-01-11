@@ -69,7 +69,7 @@ class CourseController extends Controller
     public function edit($id)
     {
         return view('admin.courses.edit', [
-            'course' => $this->courseRepository->findById([$id]),
+            'course' => $this->courseRepository->findById($id),
             'categories' => $this->categoryRepository->getAll()
         ]);
     }

@@ -1,3 +1,5 @@
+@extends('layouts.app')
+@section('content')
 <table id="cart" class="table table-hover table-condensed">
         <thead>
         <tr>
@@ -9,8 +11,10 @@
         </tr>
         </thead>
         <tbody>
+        <?php $total = 0 ?>
         @if(session('cart'))
             @foreach(session('cart') as $id => $details)
+            <?php $total += $details['price'] * $details['quantity'] ?>
                 <tr>
                     <td data-th="Product">
                         <div class="row">
@@ -27,8 +31,8 @@
                     <td data-th="Subtotal" class="text-center">${{ $details['price'] * $details['quantity'] }}</td>
                     <td class="text-end">
                         <div class="actions">
-                            <a href="" class="btn btn-sm bg-success-light me-2">
-                                <i class="fe fe-pencil"></i>
+                            <a href="{{route('cart.destroy', ['id' => $details['id']])}}" class="btn btn-sm bg-success-light me-2">
+                                Xóa
                             </a>
                         </div>
                     </td>
@@ -37,13 +41,12 @@
         @endif
         </tbody>
         <tfoot>
-        <tr class="visible-xs">
-            <td class="text-center"><strong>Total</strong></td>
-        </tr>
+
         <tr>
             <td><a href="" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
-            <td colspan="2" class="hidden-xs"></td>
-            <td class="hidden-xs text-center"><strong>Total</strong></td>
+            <td colspan="3" class="hidden-xs"></td>
+            <td class="hidden-xs text-center"><strong>Total ${{$total}}</strong></td>
         </tr>
         </tfoot>
     </table>
+    @endsection

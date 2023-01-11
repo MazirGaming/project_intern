@@ -45,14 +45,14 @@ class UserController extends Controller
     public function edit($id)
     {
         return view('admin.users.edit', [
-            'user' => $this->userRepository->findById([$id])
+            'user' => $this->userRepository->findById($id)
         ]);
     }
 
     public function update(UpdateUserRequest $request, $id)
     {
         $inputs = $request->all();
-        $user = $this->userRepository->findById([$id]);
+        $user = $this->userRepository->findById($id);
         if ($inputs['password'] == null) {
             unset($inputs['password']);
         } else {
@@ -75,7 +75,7 @@ class UserController extends Controller
     public function show($id)
     {
         return view('admin.users.show', [
-            'user' => $this->userRepository->findById([$id]),
+            'user' => $this->userRepository->findById($id),
             'courses' => $this->courseRepository->getByUserId($id),
         ]);
     }

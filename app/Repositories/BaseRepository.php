@@ -11,9 +11,9 @@ class BaseRepository
         return $this->model->updateOrCreate($conditions, $inputs);
     }
 
-    public function findById(array $input = [])
+    public function findById($id)
     {
-        $query = $this->model->find($input['0']);
+        $query = $this->model->find($id);
         return $query;
     }
 }
