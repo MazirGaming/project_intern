@@ -4,25 +4,18 @@ namespace App\Services;
 
 class CartService
 {
+    protected $cart;
+
+    public function __construct()
+    {
+        $this->cart = session()->get('cart') ?? collect();
+    }
+
     public function insert($course)
     {
-        $cart = session()->get('cart') ?? collect();
-        if (!$cart) {
-            $cart->push([
-                    $course->id => [
-                        "id" => $course->id,
-                        "name" => $course->name,
-                        "quantity" => 1,
-                        "price" => $course->price,
-                        "photo" => $course->attachment->file_name
-                    ]
-                ]);
-            session()->put('cart', $cart);
-            return;
-        }
-
-        if (isset($cart[$course->id])) {
-            $cart = $cart->map(function ($item) use ($course) {
+        $this->cart = session()->get('cart') ?? collect();
+        if ($this->cart->where('id', $course->id)->isNotEmpty()) {
+            $this->cart = $this->cart->map(function ($item) use ($course) {
                 if ($item['id'] == $course->id) {
                     ++$item['quantity'];
                 }
@@ -30,43 +23,44 @@ class CartService
                 return $item;
             });
 
-            session()->put('cart', $cart);
+            session()->put('cart', $this->cart);
             return;
         }
 
-        $cart[$course->id] = [
+        $this->cart->push([
             "id" => $course->id,
             "name" => $course->name,
             "quantity" => 1,
             "price" => $course->price,
             "photo" => $course->attachment->file_name
-        ];
-        session()->put('cart', $cart);
+        ]);
+        session()->put('cart', $this->cart);
+        return;
     }
 
     public function update($course)
     {
-        $cart = session()->get('cart');
+        $this->cart = session()->get('cart');
         $qty = request()->qty;
-        if (isset($cart[$course->id])) {
-            $cart[$course->id]['quantity'] = $qty;
-            session()->put('cart', $cart);
+        if (isset($this->cart[$course->id])) {
+            $this->cart[$course->id]['quantity'] = $qty;
+            session()->put('cart', $this->cart);
         }
     }
 
     public function total($cart)
     {
-        $cart = session()->get('cart');
-        if ($cart) {
-            return $cart->count();
+        $this->cart = session()->get('cart');
+        if ($this->cart) {
+            return $this->cart->count();
         }
     }
 
     public function exists($course)
     {
-        $cart = session()->get('cart');
-        if ($cart) {
-            $cart->where('id', $course->id);
+        $this->cart = session()->get('cart');
+        if ($this->cart) {
+            $this->cart->where('id', $course->id);
             return true;
         }
 
@@ -75,27 +69,27 @@ class CartService
 
     public function find($course)
     {
-        $cart = session()->get('cart');
-        if ($cart) {
-            return $cart->where('id', $course->id);
+        $this->cart = session()->get('cart');
+        if ($this->cart) {
+            return $this->cart->where('id', $course->id);
         }
     }
 
     public function removeItem($course)
     {
-        $cart = session()->get('cart');
-        if ($cart) {
-            foreach ($cart as $index => $item) {
-                if ($index == $course->id) {
-                    unset($cart[$index]);
+        $this->cart = session()->get('cart');
+        if ($this->cart) {
+            foreach ($this->cart as $index => $item) {
+                if ($item['id'] == $course->id) {
+                    unset($this->cart[$index]);
                 }
             }
 
-            return $cart;
+            return $this->cart;
         }
     }
 
-    public function destroy()
+    public function destroy($request)
     {
         return $request->session()->forget('cart');
     }

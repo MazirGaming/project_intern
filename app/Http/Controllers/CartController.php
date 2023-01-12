@@ -21,6 +21,7 @@ class CartController extends Controller
 
     public function addToCart(Request $request, $id)
     {
+        // $request->session()->forget('cart');
         $course = $this->courseRepository->findById($id);
         if (!$course) {
             abort(404);
@@ -38,6 +39,17 @@ class CartController extends Controller
         }
 
         $this->cartService->removeItem($course);
+        return redirect()->back()->with('message', 'Course added to cart successfully1!');
+    }
+
+    public function update(Request $request, $id)
+    {
+        $course = $this->courseRepository->findById($id);
+        $this->cartService->insert($course);
+        if (!$course) {
+            abort(404);
+        }
+
         return redirect()->back()->with('message', 'Course added to cart successfully1!');
     }
 }

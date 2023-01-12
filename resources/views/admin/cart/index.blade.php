@@ -27,18 +27,25 @@
                     <td data-th="Price">${{ $details['price'] }}</td>
                     <td data-th="Quantity">
                         <input type="number" value="{{ $details['quantity'] }}" class="form-control quantity" />
+                        <a href="{{route('cart.update', ['id' => $details['id']])}}" class="btn btn-sm bg-success-light me-2">
+                            Tăng
+                        </a>
+                        <a href="{{route('cart.update', ['id' => $details['id']])}}" class="btn btn-sm bg-success-light me-2">
+                            Giảm
+                        </a>
                     </td>
-                    <td data-th="Subtotal" class="text-center">${{ $details['price'] * $details['quantity'] }}</td>
-                    <td class="text-end">
-                        <div class="actions">
-                            <a href="{{route('cart.destroy', ['id' => $details['id']])}}" class="btn btn-sm bg-success-light me-2">
-                                Xóa
-                            </a>
-                        </div>
-                    </td>
-                </tr>
-            @endforeach
-        @endif
+                   
+                        <td data-th="Subtotal" class="text-center">${{ $details['price'] * $details['quantity'] }}</td>
+                        <td class="text-end">
+                            <div class="actions">
+                                <a href="{{route('cart.destroy', ['id' => $details['id']])}}" class="btn btn-sm bg-success-light me-2">
+                                    Xóa
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    @endforeach
+                    @endif
         </tbody>
         <tfoot>
 

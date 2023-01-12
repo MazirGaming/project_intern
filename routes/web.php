@@ -31,4 +31,5 @@ Route::prefix('admin')->middleware(['auth', 'admin.check'])->group(function () {
 Route::get('/cart', [App\Http\Controllers\CartController::class, 'index'])->name('cart.list');
 Route::get('/add-to-cart/{id}', [App\Http\Controllers\CartController::class, 'addToCart'])->name('add.to.cart');
 Route::get('/cart/{id}', [App\Http\Controllers\CartController::class, 'destroy'])->name('cart.destroy');
+Route::get('/cart/update/{id}', [App\Http\Controllers\CartController::class, 'update'])->name('cart.update');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
