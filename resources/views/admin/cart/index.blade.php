@@ -11,7 +11,9 @@
         </tr>
         </thead>
         <tbody>
-        <?php $total = 0 ?>
+            @php 
+                $total = 0;
+            @endphp
         @if(session('cart'))
             @foreach(session('cart') as $id => $details)
             <?php $total += $details['price'] * $details['quantity'] ?>

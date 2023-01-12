@@ -10,7 +10,7 @@ class CartService
     {
         $this->cart = session()->get('cart') ?? collect();
     }
-
+    
     public function insert($course)
     {
         $this->cart = session()->get('cart') ?? collect();
@@ -50,21 +50,12 @@ class CartService
 
     public function total($cart)
     {
-        $this->cart = session()->get('cart');
-        if ($this->cart) {
-            return $this->cart->count();
-        }
+        return $this->cart->count();
     }
 
-    public function exists($course)
+    public function exists($id)
     {
-        $this->cart = session()->get('cart');
-        if ($this->cart) {
-            $this->cart->where('id', $course->id);
-            return true;
-        }
-
-        return false;
+        return !empty($this->cart->where('id', $id));
     }
 
     public function find($course)
@@ -81,16 +72,19 @@ class CartService
         if ($this->cart) {
             foreach ($this->cart as $index => $item) {
                 if ($item['id'] == $course->id) {
-                    unset($this->cart[$index]);
+                    return $this->cart->splice($index, 1);
                 }
             }
-
-            return $this->cart;
         }
     }
 
     public function destroy($request)
     {
         return $request->session()->forget('cart');
+    }
+
+    public function listCourse()
+    {
+        return $this->cart;
     }
 }

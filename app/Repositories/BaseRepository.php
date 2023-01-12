@@ -13,7 +13,6 @@ class BaseRepository
 
     public function findById($id)
     {
-        $query = $this->model->find($id);
-        return $query;
+        return $this->model->find($id);
     }
 }

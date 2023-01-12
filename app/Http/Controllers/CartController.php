@@ -22,8 +22,9 @@ class CartController extends Controller
     public function addToCart(Request $request, $id)
     {
         // $request->session()->forget('cart');
-        $course = $this->courseRepository->findById($id);
-        if (!$course) {
+        // $this->cartService->listCourse();
+
+        if (!$course = $this->courseRepository->findById($id)) {
             abort(404);
         }
 
@@ -33,8 +34,7 @@ class CartController extends Controller
 
     public function destroy(Request $request, $id)
     {
-        $course = $this->courseRepository->findById($id);
-        if (!$course) {
+        if (!$course = $this->courseRepository->findById($id)) {
             abort(404);
         }
 
@@ -44,9 +44,8 @@ class CartController extends Controller
 
     public function update(Request $request, $id)
     {
-        $course = $this->courseRepository->findById($id);
         $this->cartService->insert($course);
-        if (!$course) {
+        if (!$course = $this->courseRepository->findById($id)) {
             abort(404);
         }
 
