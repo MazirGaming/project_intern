@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
-    @csrf
+<form action="{{route('cart.update')}}" method="post">
+        @csrf
 <table id="cart" class="table table-hover table-condensed">
         <thead>
         <tr>
@@ -12,9 +13,12 @@
         </tr>
         </thead>
         <tbody>
-  
+        @php 
+                $total = 0;
+            @endphp
         @if($cart)
             @foreach($cart as $id => $details)
+            <?php $total += $details['price'] * $details['quantity'] ?>
                 <tr>
                     <td data-th="Product">
                         <div class="row">
@@ -26,10 +30,10 @@
                     </td>
                     <td data-th="Price" class="price">{{$details['price']}}</td>
                     <td data-th="Quantity">
-                        <input name="quantity" type="number" value="{{$details['quantity'] }}" class="form-control quantity qty" />
+                        <input name="{{$details['id']}}" type="number" value="{{$details['quantity'] }}" class="form-control quantity qty" />
                     </td>
                    
-                        <td data-th="Subtotal" class="text-center subtotal"></td>
+                        <td data-th="Subtotal" class="text-center subtotal">${{ $details['price'] * $details['quantity'] }}</td>
                         <td class="text-end">
                             <div class="actions">
                                 <a href="{{route('cart.destroy', ['id' => $details['id']])}}" class="btn btn-sm bg-success-light me-2">
@@ -47,12 +51,13 @@
         <tr>
             <td><a href="" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
             <td colspan="3" class="hidden-xs"></td>
-            <td class="hidden-xs text-center total"></td>
+            <td class="hidden-xs text-center total"><strong>Total ${{$total}}</strong></td>
         </tr>
         </tfoot>
     </table>
-  
+    <div class="text-end">
+    <button type="submit" class="btn btn-primary" name="submit" >Submit</button>
+</div>
+    </form>
     @endsection
-@push('scripts')
-    <script src="{{asset('assets/js/update-quantity.js')}}"></script>
-@endpush
+

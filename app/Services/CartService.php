@@ -41,6 +41,19 @@ class CartService
 
     public function update($request)
     {
+        $inputs = $request->all();
+        foreach ($inputs as $key => $item) {
+            $this->cart = $this->cart->map(function ($course) use ($key, $item) {
+                if ($key == $course['id']) {
+                    $course['quantity'] = $item;
+                }
+
+                return $course;
+            });
+        };
+
+        session()->put('cart', $this->cart);
+        return;
     }
 
     public function total($cart)

@@ -44,6 +44,7 @@ class CartController extends Controller
 
     public function update(Request $request)
     {
-        //
+        app(CartService::class)->update($request);
+        return redirect()->back()->with('message', 'Course added to cart successfully1!');
     }
 }
