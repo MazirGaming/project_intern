@@ -23,22 +23,18 @@ class CartService
 
     public function update(array $inputs)
     {
-        if (!empty($inputs['updateOne'])) {
-            $this->cart = $this->cart->map(function ($item) use ($inputs) {
-                if ($item['id'] === $inputs['updateOne']['id']) {
-                    ++$item['quantity'];
-                }
-
-                return $item;
-            });
-        }
-
         foreach ($inputs as $key => $item) {
-            $this->cart = $this->cart->map(function ($course) use ($key, $item) {
-                if ($key == $course['id']) {
-                    $course['quantity'] = $item;
+            $this->cart = $this->cart->map(function ($course) use ($inputs, $key, $item) {
+                if (count($inputs) === 1){
+                    if ($key == $course['id']) {
+                        $course['quantity'] = $course['quantity'] + 1;
+                    }
+                } else {
+                    if ($key == $course['id']) {
+                        $course['quantity'] = $item;
+                    }
                 }
-
+                
                 return $course;
             });
         };

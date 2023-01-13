@@ -26,15 +26,14 @@ class CartController extends Controller
     {
         $course = $this->courseRepository->findById($id);
         $cartService = app(CartService::class);
-        $inputs = $request->all();
-        $inputs['updateOne'] = $course->getAttributes();
+        $courseUpdate = app(CartService::class)->find($course);
 
         if (!$course = $this->courseRepository->findById($id)) {
             abort(404);
         }
 
         if (app(CartService::class)->exists($course->id)) {
-            $cartService->update($inputs);
+            $cartService->update([$course->id => $courseUpdate['0']['quantity']]);
             return redirect()->back()->with('success', 'Product added to cart successfully!');
         }
 
