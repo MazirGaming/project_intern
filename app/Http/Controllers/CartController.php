@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Repositories\CourseRepository;
@@ -8,27 +10,25 @@ use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
-    public function __construct(CourseRepository $courseRepository, CartService $cartService)
+    public function __construct(CourseRepository $courseRepository)
     {
         $this->courseRepository = $courseRepository;
-        $this->cartService = $cartService;
     }
 
     public function index()
     {
-        return view('admin.cart.index');
+        return view('admin.cart.index', [
+            'cart' => app(CartService::class)->getAll()
+        ]);
     }
 
     public function addToCart(Request $request, $id)
     {
-        // $request->session()->forget('cart');
-        // $this->cartService->listCourse();
-
         if (!$course = $this->courseRepository->findById($id)) {
             abort(404);
         }
 
-        $this->cartService->insert($course);
+        app(CartService::class)->insert($course);
         return redirect()->back()->with('message', 'Course added to cart successfully1!');
     }
 
@@ -38,17 +38,12 @@ class CartController extends Controller
             abort(404);
         }
 
-        $this->cartService->removeItem($course);
+        app(CartService::class)->removeItem($course);
         return redirect()->back()->with('message', 'Course added to cart successfully1!');
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $this->cartService->insert($course);
-        if (!$course = $this->courseRepository->findById($id)) {
-            abort(404);
-        }
-
-        return redirect()->back()->with('message', 'Course added to cart successfully1!');
+        //
     }
 }

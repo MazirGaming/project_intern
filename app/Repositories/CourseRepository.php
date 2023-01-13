@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repositories;
 
 use App\Models\Course;
@@ -20,7 +22,7 @@ class CourseRepository extends BaseRepository
 
         if (!empty($input['search'])) {
             $query->where(function ($query) use ($input) {
-                $query->where('name', 'like', '%' . $input['search'] . '%');
+                $query->where('name', 'like', '%'.$input['search'].'%');
             });
         }
 

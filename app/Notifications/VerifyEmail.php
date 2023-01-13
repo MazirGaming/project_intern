@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
@@ -14,7 +16,7 @@ class VerifyEmail extends VerifyEmailBase implements ShouldQueue
     // change as you want
     public function toMail($notifiable)
     {
-        return (new MailMessage)
+        return (new MailMessage())
         ->markdown('mail.verify_user', ['url'=> $this->verificationUrl($notifiable), 'name'=> $notifiable->name]);
     }
 }

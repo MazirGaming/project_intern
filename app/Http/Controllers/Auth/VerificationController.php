@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
@@ -49,7 +51,7 @@ class VerificationController extends Controller
         }
 
         if ($request->route('id') != $request->user()->getKey()) {
-            throw new AuthorizationException;
+            throw new AuthorizationException();
         }
 
         if ($request->user()->hasVerifiedEmail()) {

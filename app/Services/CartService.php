@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 class CartService
@@ -10,10 +12,9 @@ class CartService
     {
         $this->cart = session()->get('cart') ?? collect();
     }
-    
+
     public function insert($course)
     {
-        $this->cart = session()->get('cart') ?? collect();
         if ($this->cart->where('id', $course->id)->isNotEmpty()) {
             $this->cart = $this->cart->map(function ($item) use ($course) {
                 if ($item['id'] == $course->id) {
@@ -38,14 +39,8 @@ class CartService
         return;
     }
 
-    public function update($course)
+    public function update($request)
     {
-        $this->cart = session()->get('cart');
-        $qty = request()->qty;
-        if (isset($this->cart[$course->id])) {
-            $this->cart[$course->id]['quantity'] = $qty;
-            session()->put('cart', $this->cart);
-        }
     }
 
     public function total($cart)
@@ -60,20 +55,14 @@ class CartService
 
     public function find($course)
     {
-        $this->cart = session()->get('cart');
-        if ($this->cart) {
-            return $this->cart->where('id', $course->id);
-        }
+        return $this->cart->where('id', $course->id);
     }
 
     public function removeItem($course)
     {
-        $this->cart = session()->get('cart');
-        if ($this->cart) {
-            foreach ($this->cart as $index => $item) {
-                if ($item['id'] == $course->id) {
-                    return $this->cart->splice($index, 1);
-                }
+        foreach ($this->cart as $index => $item) {
+            if ($item['id'] == $course->id) {
+                return $this->cart->splice($index, 1);
             }
         }
     }
@@ -83,7 +72,7 @@ class CartService
         return $request->session()->forget('cart');
     }
 
-    public function listCourse()
+    public function getAll()
     {
         return $this->cart;
     }

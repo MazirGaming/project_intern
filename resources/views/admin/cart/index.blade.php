@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+    @csrf
 <table id="cart" class="table table-hover table-condensed">
         <thead>
         <tr>
@@ -11,12 +12,9 @@
         </tr>
         </thead>
         <tbody>
-            @php 
-                $total = 0;
-            @endphp
-        @if(session('cart'))
-            @foreach(session('cart') as $id => $details)
-            <?php $total += $details['price'] * $details['quantity'] ?>
+  
+        @if($cart)
+            @foreach($cart as $id => $details)
                 <tr>
                     <td data-th="Product">
                         <div class="row">
@@ -26,18 +24,12 @@
                             </div>
                         </div>
                     </td>
-                    <td data-th="Price">${{ $details['price'] }}</td>
+                    <td data-th="Price" class="price">{{$details['price']}}</td>
                     <td data-th="Quantity">
-                        <input type="number" value="{{ $details['quantity'] }}" class="form-control quantity" />
-                        <a href="{{route('cart.update', ['id' => $details['id']])}}" class="btn btn-sm bg-success-light me-2">
-                            Tăng
-                        </a>
-                        <a href="{{route('cart.update', ['id' => $details['id']])}}" class="btn btn-sm bg-success-light me-2">
-                            Giảm
-                        </a>
+                        <input name="quantity" type="number" value="{{$details['quantity'] }}" class="form-control quantity qty" />
                     </td>
                    
-                        <td data-th="Subtotal" class="text-center">${{ $details['price'] * $details['quantity'] }}</td>
+                        <td data-th="Subtotal" class="text-center subtotal"></td>
                         <td class="text-end">
                             <div class="actions">
                                 <a href="{{route('cart.destroy', ['id' => $details['id']])}}" class="btn btn-sm bg-success-light me-2">
@@ -48,14 +40,19 @@
                     </tr>
                     @endforeach
                     @endif
+              
         </tbody>
         <tfoot>
 
         <tr>
             <td><a href="" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
             <td colspan="3" class="hidden-xs"></td>
-            <td class="hidden-xs text-center"><strong>Total ${{$total}}</strong></td>
+            <td class="hidden-xs text-center total"></td>
         </tr>
         </tfoot>
     </table>
+  
     @endsection
+@push('scripts')
+    <script src="{{asset('assets/js/update-quantity.js')}}"></script>
+@endpush

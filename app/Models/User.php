@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -55,15 +57,13 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function sendEmailVerificationNotification()
     {
-        $this->notify((new VerifyEmail)->onQueue('default'));
+        $this->notify((new VerifyEmail())->onQueue('default'));
     }
 
     protected function roleName(): Attribute
     {
         return Attribute::make(
-            get: function () {
-                return $this->type === static::TYPES['admin'] ? 'Admin' : 'Student';
-            }
+            get: fn () => $this->type === static::TYPES['admin'] ? 'Admin' : 'Student'
         );
     }
 }

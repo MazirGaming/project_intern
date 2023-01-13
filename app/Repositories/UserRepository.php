@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repositories;
 
 use App\Models\User;
@@ -22,9 +24,9 @@ class UserRepository extends BaseRepository
 
         if (!empty($input['search'])) {
             $query->where(function ($query) use ($input) {
-                $query->where('name', 'like', '%' . $input['search'] . '%')
-                    ->orWhere('phone', 'like', '%' . $input['search'] . '%')
-                    ->orWhere('email', 'like', '%' . $input['search'] . '%');
+                $query->where('name', 'like', '%'.$input['search'].'%')
+                    ->orWhere('phone', 'like', '%'.$input['search'].'%')
+                    ->orWhere('email', 'like', '%'.$input['search'].'%');
             });
         }
 
