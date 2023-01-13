@@ -16,7 +16,6 @@ class CartService
     public function insert($data)
     {
         $data->quantity = 1;
-        $data->photo = $data->attachment->file_name;
         $this->cart->push($data);
         session()->put('cart', $this->cart);
         return;

@@ -93,4 +93,11 @@ class Course extends Model
             get: fn () => $this->is_online === static::IS_ONLINE['online'] ? 'online' : 'offline'
         );
     }
+
+    protected function photo(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->photo = $this->attachment->file_name
+        );
+    }
 }
