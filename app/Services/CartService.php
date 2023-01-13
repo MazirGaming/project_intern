@@ -21,23 +21,18 @@ class CartService
         return;
     }
 
-    public function update($id)
+    public function update(array $inputs)
     {
-        $this->cart = $this->cart->map(function ($item) use ($id) {
-            if ($item['id'] === $id) {
-                ++$item['quantity'];
-            }
+        if (!empty($inputs['updateOne'])) {
+            $this->cart = $this->cart->map(function ($item) use ($inputs) {
+                if ($item['id'] === $inputs['updateOne']['id']) {
+                    ++$item['quantity'];
+                }
 
-            return $item;
-        });
+                return $item;
+            });
+        }
 
-        session()->put('cart', $this->cart);
-        return;
-    }
-
-    public function updateQuantity($request)
-    {
-        $inputs = $request->all();
         foreach ($inputs as $key => $item) {
             $this->cart = $this->cart->map(function ($course) use ($key, $item) {
                 if ($key == $course['id']) {
@@ -47,6 +42,7 @@ class CartService
                 return $course;
             });
         };
+
 
         session()->put('cart', $this->cart);
         return;

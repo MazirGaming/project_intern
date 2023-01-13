@@ -26,13 +26,15 @@ class CartController extends Controller
     {
         $course = $this->courseRepository->findById($id);
         $cartService = app(CartService::class);
+        $inputs = $request->all();
+        $inputs['updateOne'] = $course->getAttributes();
 
         if (!$course = $this->courseRepository->findById($id)) {
             abort(404);
         }
 
         if (app(CartService::class)->exists($course->id)) {
-            $cartService->update($course->id);
+            $cartService->update($inputs);
             return redirect()->back()->with('success', 'Product added to cart successfully!');
         }
 
@@ -52,7 +54,8 @@ class CartController extends Controller
 
     public function updateQuantity(Request $request)
     {
-        app(CartService::class)->updateQuantity($request);
+        $inputs = $request->all();
+        app(CartService::class)->update($inputs);
         return redirect()->back()->with('message', 'Course added to cart successfully1!');
     }
 }
