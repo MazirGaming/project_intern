@@ -24,12 +24,20 @@ class CartController extends Controller
 
     public function addToCart(Request $request, $id)
     {
+        $course = $this->courseRepository->findById($id);
+        $cartService = app(CartService::class);
+
         if (!$course = $this->courseRepository->findById($id)) {
             abort(404);
         }
 
-        app(CartService::class)->insert($course);
-        return redirect()->back()->with('message', 'Course added to cart successfully1!');
+        if (app(CartService::class)->exists($course->id)) {
+            $cartService->update($course->id);
+            return redirect()->back()->with('success', 'Product added to cart successfully!');
+        }
+
+        $cartService->insert($course);
+        return redirect()->back()->with('success', 'Product added to cart successfully!');
     }
 
     public function destroy(Request $request, $id)
@@ -42,9 +50,9 @@ class CartController extends Controller
         return redirect()->back()->with('message', 'Course added to cart successfully1!');
     }
 
-    public function update(Request $request)
+    public function updateQuantity(Request $request)
     {
-        app(CartService::class)->update($request);
+        app(CartService::class)->updateQuantity($request);
         return redirect()->back()->with('message', 'Course added to cart successfully1!');
     }
 }

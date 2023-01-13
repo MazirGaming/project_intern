@@ -15,19 +15,6 @@ class CartService
 
     public function insert($course)
     {
-        if ($this->cart->where('id', $course->id)->isNotEmpty()) {
-            $this->cart = $this->cart->map(function ($item) use ($course) {
-                if ($item['id'] == $course->id) {
-                    ++$item['quantity'];
-                }
-
-                return $item;
-            });
-
-            session()->put('cart', $this->cart);
-            return;
-        }
-
         $this->cart->push([
             "id" => $course->id,
             "name" => $course->name,
@@ -39,7 +26,21 @@ class CartService
         return;
     }
 
-    public function update($request)
+    public function update($id)
+    {
+        $this->cart = $this->cart->map(function ($item) use ($id) {
+            if ($item['id'] === $id) {
+                ++$item['quantity'];
+            }
+
+            return $item;
+        });
+
+        session()->put('cart', $this->cart);
+        return;
+    }
+
+    public function updateQuantity($request)
     {
         $inputs = $request->all();
         foreach ($inputs as $key => $item) {
@@ -63,7 +64,7 @@ class CartService
 
     public function exists($id)
     {
-        return !empty($this->cart->where('id', $id));
+        return $this->cart->where('id', $id)->isNotEmpty();
     }
 
     public function find($course)
