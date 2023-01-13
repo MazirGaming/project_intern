@@ -25,8 +25,8 @@ class CartService
     {
         foreach ($inputs as $key => $item) {
             $this->cart = $this->cart->map(function ($course) use ($inputs, $key, $item) {
-                if (count($inputs) === 1){
-                    if ($key == $course['id']) {
+                if (!empty($inputs['course->id'])){
+                    if ($item == $course['id']) {
                         $course['quantity'] = $course['quantity'] + 1;
                     }
                 } else {
