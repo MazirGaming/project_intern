@@ -13,15 +13,11 @@ class CartService
         $this->cart = session()->get('cart') ?? collect();
     }
 
-    public function insert($course)
+    public function insert($data)
     {
-        $this->cart->push([
-            "id" => $course->id,
-            "name" => $course->name,
-            "quantity" => 1,
-            "price" => $course->price,
-            "photo" => $course->attachment->file_name
-        ]);
+        $data->quantity = 1;
+        $data->photo = $data->attachment->file_name;
+        $this->cart->push($data);
         session()->put('cart', $this->cart);
         return;
     }
