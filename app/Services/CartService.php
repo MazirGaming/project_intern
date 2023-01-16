@@ -21,15 +21,15 @@ class CartService
         return;
     }
 
-    public function update(array $inputs)
+    public function update(array $inputs, $isReplace = true)
     {
         foreach ($inputs as $key => $quantity) {
-            $this->cart = $this->cart->map(function ($course) use ($inputs, $key, $quantity) {
-                if ($key == $course['id']) {
-                    $quantity === 1 ? $course['quantity'] += 1 : $course['quantity'] = $quantity;
+            $this->cart = $this->cart->map(function ($item) use ($isReplace, $key, $quantity) {
+                if ($key == $item->id) {
+                    $isReplace ? $item->quantity = $quantity : $item->quantity += $quantity ;
                 }
-                
-                return $course;
+
+                return $item;
             });
         };
 
