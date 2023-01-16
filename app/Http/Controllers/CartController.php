@@ -32,7 +32,7 @@ class CartController extends Controller
         }
 
         if (app(CartService::class)->exists($course->id)) {
-            $cartService->update(['course->id' => $course->id]);
+            $cartService->update([$course->id => 1]);
             return redirect()->back()->with('success', 'Product added to cart successfully!');
         }
 
@@ -52,7 +52,7 @@ class CartController extends Controller
 
     public function updateQuantity(Request $request)
     {
-        $inputs = $request->all();
+        $inputs = $request->all()['quantity'];
         app(CartService::class)->update($inputs);
         return redirect()->back()->with('message', 'Course added to cart successfully1!');
     }
