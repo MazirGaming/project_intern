@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -88,9 +90,14 @@ class Course extends Model
     protected function courseType(): Attribute
     {
         return Attribute::make(
-            get: function () {
-                return $this->is_online === static::IS_ONLINE['online'] ? 'online' : 'offline';
-            }
+            get: fn () => $this->is_online === static::IS_ONLINE['online'] ? 'online' : 'offline'
+        );
+    }
+
+    protected function photo(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->photo = $this->attachment->file_name
         );
     }
 }

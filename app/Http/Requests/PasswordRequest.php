@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -27,7 +29,7 @@ class PasswordRequest extends FormRequest
     public function rules()
     {
         return [
-            'old-password' => ['required', 'max:255', new CheckCorrectPassword],
+            'old-password' => ['required', 'max:255', new CheckCorrectPassword()],
             'new_password' => ['required', Password::min(6)->symbols(), 'max:255', 'confirmed'],
         ];
     }

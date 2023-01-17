@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repositories;
 
 class BaseRepository
@@ -11,9 +13,8 @@ class BaseRepository
         return $this->model->updateOrCreate($conditions, $inputs);
     }
 
-    public function findById(array $input = [])
+    public function findById($id)
     {
-        $query = $this->model->find($input['0']);
-        return $query;
+        return $this->model->find($id);
     }
 }

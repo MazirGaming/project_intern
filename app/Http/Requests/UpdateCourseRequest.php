@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -26,7 +28,7 @@ class UpdateCourseRequest extends FormRequest
     {
         return [
             'name' => ['required','max:255'],
-            'slug' => ['required','unique:courses,slug,' . $this->route('course'),'max:255'],
+            'slug' => ['required','unique:courses,slug,'.$this->route('course'),'max:255'],
             'link' => ['max:255'],
             'price' => ['numeric','digits_between:1,17'],
             'old_price' => ['numeric','digits_between:1,17'],

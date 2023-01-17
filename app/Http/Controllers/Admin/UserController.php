@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -24,7 +26,7 @@ class UserController extends Controller
     public function index()
     {
         return view('admin.users.index', [
-               'users' => $this->userRepository->getAll(request()->all())
+            'users' => $this->userRepository->getAll(request()->all())
         ]);
     }
 
@@ -45,19 +47,21 @@ class UserController extends Controller
     public function edit($id)
     {
         return view('admin.users.edit', [
-            'user' => $this->userRepository->findById([$id])
+            'user' => $this->userRepository->findById($id)
         ]);
     }
 
     public function update(UpdateUserRequest $request, $id)
     {
         $inputs = $request->all();
-        $user = $this->userRepository->findById([$id]);
+        $user = $this->userRepository->findById($id);
+
         if ($inputs['password'] == null) {
             unset($inputs['password']);
         } else {
             $inputs['password'] = Hash::make($inputs['password']);
         }
+
         $this->userRepository->save($inputs, ['id' => $id]);
         return redirect()->route('user.index')->with('message', 'Saved successfully!');
     }
@@ -75,7 +79,7 @@ class UserController extends Controller
     public function show($id)
     {
         return view('admin.users.show', [
-            'user' => $this->userRepository->findById([$id]),
+            'user' => $this->userRepository->findById($id),
             'courses' => $this->courseRepository->getByUserId($id),
         ]);
     }

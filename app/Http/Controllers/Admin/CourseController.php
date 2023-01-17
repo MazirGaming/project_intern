@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -69,7 +71,7 @@ class CourseController extends Controller
     public function edit($id)
     {
         return view('admin.courses.edit', [
-            'course' => $this->courseRepository->findById([$id]),
+            'course' => $this->courseRepository->findById($id),
             'categories' => $this->categoryRepository->getAll()
         ]);
     }
@@ -78,8 +80,8 @@ class CourseController extends Controller
     {
         $inputs = $request->all();
         if (!empty($inputs['photo'])) {
-            if (Storage::exists("public\attachments\\" . $inputs['oldPhoto'])) {
-                Storage::delete("public\attachments\\" . $inputs['oldPhoto']);
+            if (Storage::exists("public\attachments\\".$inputs['oldPhoto'])) {
+                Storage::delete("public\attachments\\".$inputs['oldPhoto']);
             }
         }
 

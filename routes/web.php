@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,9 +16,7 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', fn () => view('welcome'));
 Route::get('email/verify/{id}/{hash}', [VerificationController::class,'verify'])->name('verifycation.verify');
 Auth::routes(['verify' => true]);
 
@@ -28,10 +28,8 @@ Route::prefix('admin')->middleware(['auth', 'admin.check'])->group(function () {
     Route::resource('course', App\Http\Controllers\Admin\CourseController::class);
     Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
 });
-
-
-
-
-
-
+Route::get('/cart', [App\Http\Controllers\CartController::class, 'index'])->name('cart.list');
+Route::get('/add-to-cart/{id}', [App\Http\Controllers\CartController::class, 'addToCart'])->name('add.to.cart');
+Route::get('/cart/{id}', [App\Http\Controllers\CartController::class, 'destroy'])->name('cart.destroy');
+Route::post('/cart/update', [App\Http\Controllers\CartController::class, 'updateQuantity'])->name('cart.update');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

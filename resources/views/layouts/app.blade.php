@@ -13,6 +13,18 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/img/favicon.png')}} ">
+
+    <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
+
+    <link rel="stylesheet" href="{{asset('assets/css/font-awesome.min.css')}}">
+
+    <link rel="stylesheet" href="{{asset('assets/css/feathericon.min.css')}}">
+
+    <link rel="stylesheet" href="{{asset('assets/plugins/morris/morris.css')}}">
+
+    <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
@@ -76,5 +88,15 @@
             @yield('content')
         </main>
     </div>
+    <script src="https://kit.fontawesome.com/46a24d346e.js" crossorigin="anonymous"></script>
+
+    <script src="{{asset('assets/js/jquery-3.6.0.min.js')}}"></script>
+
+    <script src="{{asset('assets/js/bootstrap.bundle.min.js')}}"></script>
+
+    <script src="{{asset('assets/plugins/slimscroll/jquery.slimscroll.min.js')}}"></script>
+
+    <script src="{{asset('assets/js/script.js')}}"></script>
 </body>
 </html>
+

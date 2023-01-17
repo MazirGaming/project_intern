@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\View\Components;
 
 use Illuminate\View\Component;
+use Closure;
 
 class SortUrl extends Component
 {
@@ -14,7 +17,7 @@ class SortUrl extends Component
         'desc' => 'fa-caret-down',
         'asc' => 'fa-caret-up',
         'both' => 'fa-sort',
-        ];
+    ];
 
     public function __construct($columnName)
     {
@@ -24,7 +27,7 @@ class SortUrl extends Component
     /**
      * Get the view / contents that represent the component.
      *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
+     * @return \Illuminate\Contracts\View\View|Closure|string
      */
     public function render()
     {

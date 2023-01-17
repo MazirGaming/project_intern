@@ -47,9 +47,9 @@
             <ul class="nav user-menu">
 
                 <li class="nav-item dropdown noti-dropdown">
-                    <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
-                        <i class="fa fa-bell"></i> <span class="badge badge-pill">3</span>
-                    </a>
+                        <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
+                            <i class="fa fa-bell"></i> <span class="badge badge-pill">3</span>
+                        </a>
                     <div class="dropdown-menu notifications">
                         <div class="topnav-dropdown-header">
                             <span class="notification-title">Notifications</span>
@@ -119,6 +119,43 @@
                                                         Inc</span> added a new product <span class="noti-title">Apple
                                                         MacBook Pro</span></p>
                                                 <p class="noti-time"><span class="notification-time">12 mins ago</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="topnav-dropdown-footer">
+                            <a href="#">View all Notifications</a>
+                        </div>
+                    </div>
+                </li>
+
+
+                
+                <li class="nav-item dropdown noti-dropdown">
+                        <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
+                            <i class="fa-solid fa-cart-shopping"></i> <span class="badge badge-pill"></span>
+                        </a>
+                    <div class="dropdown-menu notifications">
+                        <div class="topnav-dropdown-header">
+                            <span class="notification-title">Notifications</span>
+                            <a href="javascript:void(0)" class="clear-noti"> Clear All </a>
+                        </div>
+                        <div class="noti-content">
+                            <ul class="notification-list">
+                                <li class="notification-message">
+                                    <a href="#">
+                                        <div class="media d-flex">
+                                            <span class="avatar avatar-sm flex-shrink-0">
+                                                <img class="avatar-img rounded-circle" alt="User Image"
+                                                    src="{{asset('assets/img/profiles/avatar-02.jpg')}}">
+                                            </span>
+                                            <div class="media-body flex-grow-1">
+                                                <p class="noti-details"><span class="noti-title">Carlson Tech</span> has
+                                                    approved <span class="noti-title">your estimate</span></p>
+                                                <p class="noti-time"><span class="notification-time">4 mins ago</span>
                                                 </p>
                                             </div>
                                         </div>
