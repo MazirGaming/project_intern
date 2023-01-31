@@ -66,6 +66,9 @@
                                                      <a href="{{route('course.edit', ['course' => $course->id])}}" class="btn btn-sm bg-success-light me-2">
                                                         <i class="fe fe-pencil"></i>
                                                     </a>
+                                                    <a href="{{route('course.show', ['course' => $course->id])}}" class="btn btn-sm bg-success-light me-2">
+                                                        xem
+                                                    </a>
                                                     <x-delete userId="{{$course->id}}" currentUserId="{{Auth::user()->id}}" route="{{route('course.destroy', ['course' => $course->id])}}" :label="'Xóa'"></x-delete>
                                                 </div>
                                             </td>   

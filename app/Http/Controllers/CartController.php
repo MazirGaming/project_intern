@@ -7,6 +7,8 @@ namespace App\Http\Controllers;
 use App\Repositories\CourseRepository;
 use App\Services\CartService;
 use Illuminate\Http\Request;
+use App\Mail\CheckOutOderMail;
+use Illuminate\Support\Facades\Mail;
 
 class CartController extends Controller
 {
@@ -54,5 +56,11 @@ class CartController extends Controller
     {
         app(CartService::class)->update($request->quantity);
         return redirect()->back()->with('message', 'Course added to cart successfully1!');
+    }
+
+    public function checkOut(Request $request)
+    {
+        Mail::to($request->user())->send(new CheckOutOderMail($request->all(), app(CartService::class)->getAll()));
+        return redirect()->back()->with('message', 'Successfully');
     }
 }

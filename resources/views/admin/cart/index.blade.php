@@ -1,7 +1,8 @@
 @extends('layouts.app')
 @section('content')
 <form action="{{route('cart.update')}}" method="post">
-        @csrf
+@csrf
+
 <table id="cart" class="table table-hover table-condensed">
         <thead>
         <tr>
@@ -51,13 +52,19 @@
         <tr>
             <td><a href="" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
             <td colspan="3" class="hidden-xs"></td>
+            <input name="total" type="hidden" value ="{{$total}}">
             <td class="hidden-xs text-center total"><strong>Total ${{$total}}</strong></td>
         </tr>
         </tfoot>
     </table>
-    <div class="text-end">
-    <button type="submit" class="btn btn-primary" name="submit" >Submit</button>
+    
+    
+<div class="text-end">
+    <button type="submit" class="btn btn-primary" name="submit" >Update</button>
 </div>
+<td>
+        <input type="submit" formaction = "{{route('cart.check.out')}}" class="noborder" value="CheckOut" alt="Checkout" />
+    </td>
     </form>
     @endsection
 
