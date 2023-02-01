@@ -22,7 +22,7 @@
                         @foreach($courses as $course)
                         <div class="col">
                             <div class="card">
-                            <img src="{{asset('storage/attachments/'.$course->attachment->file_name)}} ?? null" class="card-img-top" alt="...">
+                            <img src="{{asset('storage/attachments/'.$course->attachment->file_name)}}" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">{{$course->name}}</h5>
                                 <p class="card-text">{{$course->content}}</p>
