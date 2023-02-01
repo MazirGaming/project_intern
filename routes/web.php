@@ -34,5 +34,5 @@ Route::get('/cart', [App\Http\Controllers\CartController::class, 'index'])->name
 Route::get('/add-to-cart/{id}', [App\Http\Controllers\CartController::class, 'addToCart'])->name('add.to.cart');
 Route::get('/cart/{id}', [App\Http\Controllers\CartController::class, 'destroy'])->name('cart.destroy');
 Route::post('/cart/update', [App\Http\Controllers\CartController::class, 'updateQuantity'])->name('cart.update');
-Route::post('/cart/checkout', [App\Http\Controllers\CartController::class, 'checkOut'])->name('cart.check.out');
+Route::post('/cart/checkout', [App\Http\Controllers\CartController::class, 'checkOut'])->name('cart.check.out')->middleware('auth');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

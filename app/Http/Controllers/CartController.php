@@ -6,9 +6,8 @@ namespace App\Http\Controllers;
 
 use App\Repositories\CourseRepository;
 use App\Services\CartService;
+use App\Services\MailService;
 use Illuminate\Http\Request;
-use App\Mail\CheckOutOderMail;
-use Illuminate\Support\Facades\Mail;
 
 class CartController extends Controller
 {
@@ -60,7 +59,7 @@ class CartController extends Controller
 
     public function checkOut(Request $request)
     {
-        Mail::to($request->user())->send(new CheckOutOderMail($request->all(), app(CartService::class)->getAll()));
+        app(MailService::class)->sendMailCheckoutOrder($request);
         return redirect()->back()->with('message', 'Successfully');
     }
 }
