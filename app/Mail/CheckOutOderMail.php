@@ -8,18 +8,18 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
+use Illuminate\Queue\SerializesModels;
 
 class CheckOutOderMail extends Mailable implements ShouldQueue
 {
     use Queueable;
+    use SerializesModels;
 
-    public $mailData;
-    public $cart;
+    public $courses;
 
-    public function __construct($mailData, $cart)
+    public function __construct($courses)
     {
-        $this->mailData = $mailData;
-        $this->cart = $cart;
+        $this->courses = $courses;
     }
 
     public function content()
@@ -27,8 +27,7 @@ class CheckOutOderMail extends Mailable implements ShouldQueue
         return new Content(
             markdown: 'mail.check_out',
             with: [
-                'total' => $this->mailData['total'],
-                'listCourse' => $this->cart
+                'listCourse' => $this->courses
             ],
         );
     }

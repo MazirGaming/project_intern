@@ -57,9 +57,9 @@ class CartController extends Controller
         return redirect()->back()->with('message', 'Course added to cart successfully1!');
     }
 
-    public function checkOut(Request $request)
+    public function checkOut()
     {
-        app(MailService::class)->sendMailCheckoutOrder($request);
+        app(MailService::class)->sendMailCheckoutOrder(auth()->user(), app(CartService::class)->getAll());
         return redirect()->back()->with('message', 'Successfully');
     }
 }

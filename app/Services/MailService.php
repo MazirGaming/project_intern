@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\Mail;
 
 class MailService
 {
-    public function sendMailCheckoutOrder($request)
+    public function sendMailCheckoutOrder($user, $courses)
     {
-        return Mail::to($request->user())->send(new CheckOutOderMail($request->all(), app(CartService::class)->getAll()));
+        return Mail::to($user)->send(new CheckOutOderMail($courses));
     }
 }
