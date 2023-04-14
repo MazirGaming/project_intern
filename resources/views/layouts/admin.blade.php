@@ -47,9 +47,9 @@
             <ul class="nav user-menu">
 
                 <li class="nav-item dropdown noti-dropdown">
-                        <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
-                            <i class="fa fa-bell"></i> <span class="badge badge-pill">3</span>
-                        </a>
+                    <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
+                        <i class="fa fa-bell"></i> <span class="badge badge-pill">3</span>
+                    </a>
                     <div class="dropdown-menu notifications">
                         <div class="topnav-dropdown-header">
                             <span class="notification-title">Notifications</span>
@@ -133,11 +133,11 @@
                 </li>
 
 
-                
+
                 <li class="nav-item dropdown noti-dropdown">
-                        <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
-                            <i class="fa-solid fa-cart-shopping"></i> <span class="badge badge-pill"></span>
-                        </a>
+                    <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
+                        <i class="fa-solid fa-cart-shopping"></i> <span class="badge badge-pill"></span>
+                    </a>
                     <div class="dropdown-menu notifications">
                         <div class="topnav-dropdown-header">
                             <span class="notification-title">Notifications</span>
@@ -172,8 +172,9 @@
 
                 <li class="nav-item dropdown has-arrow">
                     <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
-                        <span class="user-img"><img class="rounded-circle" src="{{asset('assets/img/profiles/avatar-01.jpg')}}"
-                                width="31" alt="Seema Sisty"></span>
+                        <span class="user-img"><img class="rounded-circle"
+                                src="{{asset('assets/img/profiles/avatar-01.jpg')}}" width="31"
+                                alt="Seema Sisty"></span>
                     </a>
                     <div class="dropdown-menu">
                         <div class="user-header">
@@ -202,9 +203,9 @@
 
         <div class="page-wrapper">
             <div class="content container-fluid">
-                
-                    @yield('main')
-                
+
+                @yield('main')
+
             </div>
         </div>
 
